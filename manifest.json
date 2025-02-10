@@ -1,0 +1,23 @@
+{
+  "short_name": "i15",
+  "name": "Informaticos15",
+  "icons": [
+    {
+      "src": "img/i15.png",
+      "type": "image/webp",
+      "sizes": "512x512"
+    },
+    {
+      "src": "img/i15.png",
+      "type": "image/x-icon",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "https://etromulogallegos.info.ve/informaticos15",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "/maps/",
+  "theme_color": "#6248cc",
+  "orientation": "landscape"
+
+}

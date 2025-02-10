@@ -1,0 +1,184 @@
+<html>
+  <head>
+    <title>Protocolo de Transferencia de Archivos (TCP)</title>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="datagrama"]').tooltip();   
+    });
+    </script>
+    <link async="async" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <style>
+    .img_red {width:24px;}
+
+
+    #TCP {text-align:;font-size:17px;color:black;text-inline:150%;}
+
+    .ip_caption_tcp {padding: 0; position: relative; }
+    .ip_caption_tcp img {display: block; padding: 0; border: 0;}
+    .ip_caption_tcp::before {content: attr(title); position: absolute; background-color:#9fc5e8; color: #ffffff; font-size: 15px; padding:5px; right: 0; bottom: 0; left: 0; text-align: center; z-index: 1;width:104%;left:-20px;}
+    #img_top_tcp {width:104% ; height:320px; text-align:center; left:-20px; position:relative}
+
+    .emoji {width:20px;height:20px}
+      #def_tcp {}
+      #hist_tcp {}
+      #img_tcp_modelos {width:80%;heigth:180px;}
+      #pasos_tcp {display:inline-block;width:58%;}
+      #pasos_tcp_img {display:inline-block;width:41%;;float:left}
+
+      
+    .ip_caption_how_tcp {padding: 0; position: relative; }
+    .ip_caption_how_tcp img {display: block; padding: 0; border: 0;}
+    .ip_caption_how_tcp::before {content: attr(title); position: absolute; background-color:black; color: white; font-size: 10px; padding:5px;  text-align: center; z-index: 1;width:75%;}
+    #img_how_tcp {width:75%}
+
+      #img_check_tcp {width:130%;height:450px;margin-right:50px;float:left}
+
+    #tcp_ref {list-style:none inside url('');clear:both;}
+
+    @media screen and (max-width:800px){
+    .img_red {width:8px;}
+    #yo {font-size:10px;text-underline-position: none}
+    #TCP {text-align:justify;font-size:8px}
+    .emoji {width:10px;height:10px}
+    #img_tcp_modelos {width:80%;heigth:100px;}
+    .ip_caption_tcp::before {content: attr(title); position: absolute; background-color:#9fc5e8; color: #ffffff; font-size: 7px; padding:2px; right: 0; bottom: 0; text-align: center; z-index: 1;}
+    #img_top_tcp {width:104% ; height:160px; text-align:center; left:-20px; position:relative}
+      #img_check_tcp {display:inline-block;width:100%;margin:0px 0px 0px 0px;float:left;height:220px}
+
+    .ip_caption_how_tcp::before { font-size: 6px; padding:2px; }
+    #img_how_tcp {width:75%}
+
+    }
+    .rrss{
+              border-color: black;
+              text-align:center;
+              height:8vh;
+              width:50%;
+              color:white;
+              display: flex; flex-flow: row wrap; justify-content: space-around; align-items: stretch;
+              margin: 0px 10px;
+              font-size:18px;
+            }
+
+            .rrss *{color:green; font.-size:24px; text-decoration: none;}
+            .rrss div{ border:3px double green; border-radius:50%; width:45px; height: 45px;text-align:center;
+                      display: flex; flex-flow: row wrap; justify-content: center; align-items:center; margin: 0px 30px;}
+            .rrss div:hover {background:pink;}
+
+    </style>
+  </head>
+
+  <body>
+    <div id="TCP">
+       <div id="pre_tcp">
+        <center class="ip_caption_tcp" title="TCP chequea que todos los paquetes de información lleguen a su destino sin daños y en el orden correcto">
+          <img id="img_top_tcp" src="TCP.png"/>
+        </center>
+    <center id="iWrote">
+      por <a id="yo" href="https://ivanlopezpedreanez.blogspot.com"> Ivan Guillermo Lopez Pedreañez</a><br/>
+     <hr style="width:20%">
+
+      <center class="rrss">
+              <a href="https://www.facebook.com/"><div><i class="fa fa-facebook-official"></i></div></a>
+              <a href="https://www.instagram.com/" target="_blank"><div><i class="fa fa-instagram"></i></div></a>
+              <a href="https://twitter.com/ivanguillermolp" target="_blank"><div><i class="fa fa-twitter"></i></div></a>
+              <a href="https://www.youtube.com/" target="_blank">
+              <div><i class="fa fa-youtube"></i></div></a>
+      </center> 
+    </center>
+    <br/>
+
+          <p>Internet la entendemos como "un conjunto de <a href="">redes informáticas</a> internconectadas" <a href="">[1]</a>,  la idea detrás de lograr está interconexión, era principalmente que entre computadores de todo el mundo pudieran compartirse información.
+           
+          <p>Para poder lograr esto, la comunicación entre los diferentes computadores, cada uno posiblemente con diferentes fabricantes, arquitecturas, etc. se necesitaba desarrollar, tal y como para la comunicación entre diferentes personas, un lenguaje común por medio del cual los computadores pudieran ponerse de acuerdo sobre como se llevaría a cabo el proceso de transmisión de la información.
+
+          <p>Un problema que surge de inmediato al pensar en esta transmisión es como sabemos realmente que el computador A que pide información al computador B, está recibiendo exactamente, sin corrupción ni errores la información que está pidiendo.
+
+          <p>Otro problema igual de importante era determinar que hacer si en el tanscurso de la transmisión de la información desde B hasta A, se producía alguna interrupción. ¿Cómo continuar?¿Desde qué punto?¿Cómo saber, al retomarse la conexión, cuanto de la información ha sido transmitido fielmente y cómo evitar comenzar desde cero?
+
+          <p>Es aquí donde es necesario establecer un <a href="">protocolo</a>, o sea, una serie de normas universales a todo internet que establezca las acciones a seguir, por parte de los computadores, en medio de una transmisión.
+
+          <h3>Protocolo de Control de Trasmisión (TCP)</h3>
+
+          <p>Dentro del proceso de transmitir datos entre redes se cumplen varias etapas. Una de las etapas más importantes es lograr la conexión en sí entre el computador A y el computador B. Es decir, recibir ese 
+          <img class="emoji" src="https://3.bp.blogspot.com/-VcGwibInXFc/W2LY7wbCayI/AAAAAAAAFHQ/MfANkNamP4YrdODoy4wju9bxWnnYFLxlwCLcBGAs/s320/thumbs-up.png" />
+           o ese
+           <img class="emoji" src="https://4.bp.blogspot.com/-tNkYUsVF1Ls/W2LZctfcfMI/AAAAAAAAFHY/P1gg5lnkbQ4swBXtiCBLZu_2EZgJCeeswCLcBGAs/s320/double-check-blue.png"/>
+           que nos confirma que ya están ambos equipos listos para comenzar. Esta etapa se conoce como capa de transporte, y se encuentra en las capas 4 y 2 en los <a href="">modelos OSI y TCP/IP</a>, respectivamente. Auqnue también abarca la capa de sesión (capa 3) dentro del modelo OSI.
+
+            <center>
+              <a href="imgmodelos_OSI.png" imageanchor="1" >
+                <img id="img_tcp_modelos" src="imgmodelos_OSI.png" />
+              </a>
+            </center>
+
+          <p>En definitiva, para esta etapa en particular existen y existieron diversos protocolos, pero el protocolo que desarrollaron Vint Cerf y Bob Kahn, y que expusieron por primera vez en un documento publicado por el <a href="">Instituto de Ingenieros Eléctricos y Electrónicos (IEEE)</a> en mayo de 1974, al cual llamaron Transmission Control Protocol (TCP), lo cual traduce Protocolo de Control de Trasmisión, es uel protocolo que junto con el <a href="">Protocolo de Internet (IP)</a> dan forma, vida y características a lo que conocemos como internet. De hecho, es pefectamente posible conectar redes usando otros protocolos, pero lo que llamamos internet tiene como características principales el uso de estos dos protocolos
+
+       </div>
+    <br/>
+
+      <div id="hist_tcp">
+        <h2>Definición técnica</h2>
+        <p>
+          En el documento donde se expuso el nacimiento del TCP, Bob Kahn y Vint Cerf describieron básicamente un protocolo de internetworking para compartir recursos utilizando la conmutación de paquetes entre los nodos, trabajando con Gérard Le Lann para incorporar conceptos del proyecto francés <a href="https://es.wikipedia.org/wiki/Cyclades">CYCLADES</a>. 
+        </p>
+        <p>
+          Un componente de control central de este modelo fue el Programa de Control de Transmisión que incorporó enlaces orientados a conexión y servicios de <a href="#" data-toggle="datagrama" title="es un paquete de datos que constituye el mínimo bloque de información en una red de conmutación por datagramas">datagramas</a> entre hosts. El Programa de control de transmisión monolítico se dividió posteriormente en una arquitectura modular que consta del Protocolo de control de transmisión en la capa de transporte y el Protocolo de Internet en la capa de Internet.
+        </p>
+        <p>
+          Ya hablando más técnicamente, el TCP es un protocolo orientado a la conexión, lo que significa que se establece y mantiene una conexión hasta que los programas de aplicación en cada extremo hayan terminado de intercambiar mensajes. Determina cómo dividir los datos de la aplicación en paquetes que las redes pueden entregar, envía paquetes y acepta paquetes desde la capa de red, administra el control de flujo y, como está destinado a proporcionar transmisión de datos sin errores, maneja la retransmisión de paquetes caídos o ilegibles así como el reconocimiento de todos los paquetes que llegan.
+        </p> 
+      </div>
+    <br/>
+
+      <div id="func_tcp">
+    <h2>Cómo funciona</h2>
+    <p>El desarrollo de internet tuvo varias etapas y varios experimentos de redes anteriores. El antecedente más directo e impotante fue la <a href="">ARPANET</a> y esta también tenía su propio protocolo de transmisión. Ese protocolo se llamaba NCP (Programa de Control de Red) y fue sustituido por el TCP el 1 de Enero de 1983</p>
+
+    <p>NCP conectaba procesos que se ejecutaban en diferentes computadoras de ARPANET. Los protocolos en ARPANET en la capa física, capa de enlace de datos y capa de red se implementaron en procesadores de mensajes de interfaz por separado. Esto significaba que el NCP funcionaba muy parecido a una capa de transporte, ya que definía el procedimiento para conectar dos hosts.</p>
+
+
+    <center class="ip_caption_how_tcp" title="Se inician con un envío de un solo paquete y luego confirmar que se recibió se duplica la cantidad de paquetes por envío cada vez">
+    <img id="img_how_tcp" src="https://4.bp.blogspot.com/-Q9M1SRCIGmg/W4PqD4lL4dI/AAAAAAAAFMQ/T2ANtvKDX-sePs9Z4DbGVb4A2OcGNWLPQCLcBGAs/s1600/how_tcp.gif"/>
+
+    </center>
+
+
+
+    <p>La idea general detrás del internet moderno es el envío de la información en forma de paquetes. Cuando una computadora requiere la información que está en otra, esta infomación es dividida en paquetes. TCP chequea que todos los paquetes de información transmitidos a traveés de una red IP, lleguen a su destino, sin daños y en el orden correcto. En el proceso de transmisión mediante TCP, estos paquetes son enviados, en su forma ideal, empezando por un solo paquete; al llegar ese paquete a su destino, desde ese destino se envía un mensaje de confirmación de recibido al HOST y entonce este HOST procede a enviar ahora el doble de paquetes. Así continuan enviandose paquetes, recibiendo confirmación y enviando de el doble de paquetes que la vez anterior hasta que el mensaje llegue completo y se proceda a rearmar en la computaodra de dcestino, o, en caso de haber una caida en la conexión, al producirse la reconexión, se empiezan a enviar los paquetes faltantes (no se comienza desde cero) pero estos paquetes faltantes se empiezan a enviar de nuevo uno solo, luego dos, luego cuatro, así sucesivamente</p>
+
+
+    <div id="pasos_tcp_img">
+    <img id="img_check_tcp" src="https://4.bp.blogspot.com/-QZW-bflF5h8/W2Vkhm2GmlI/AAAAAAAAFIU/y8Mm7BrKtMIi1F481Q7JhI00kza7Pk8mwCLcBGAs/s1600/check_list_tcp_2.gif"/>
+    </div>
+        <div id="pasos_tcp">
+
+          <b>Ejemplo de funcionamiento de TCP</b>
+
+          <ol>
+              <li>Un servidor web envía un archivo <a href="">HTML</a> a un cliente, utilizando el protocolo <a href="">HTTP</a></li>
+              <li>La capa de programa HTTP le pide a la capa TCP que configure la conexión y envíe el archivo</li>
+              <li>La pila TCP divide el archivo en paquetes, los numera y luego los reenvía individualmente a la capa <a href="">IP</a> para su entrega. <br/>Aunque cada paquete en la transmisión tendrá las mismas direcciones IP de origen y destino, los paquetes pueden enviarse a lo largo de múltiples rutas.</li>
+              <li>La capa de programa TCP en la computadora del cliente espera hasta que hayan llegado todos los paquetes, luego reconoce los que recibe y solicita la retransmisión en cualquiera que no lo haga (en función de los números de paquete faltantes)</li>
+              <li>Finalmente los ensambla en un archivo y entrega el archivo a la aplicación receptora</li>
+          </ol>
+        </div>
+          
+
+
+      <div id="tcp_biblio">
+    <a href="https://www.ietf.org/rfc/rfc793.txt">Aquí</a> puedes ver el protocolo oficial
+
+    <ol id="tcp_ref">
+    <h2>REFERENCIAS</h2>
+    <li><a href="https://groups.google.com/forum/#!topic/alt.folklore.computers/bwtDfrtP56U">https://groups.google.com/forum/#!topic/alt.folklore.computers/bwtDfrtP56U</a></li>
+    <li><a href="https://www.quora.com/What-were-the-important-differences-between-TCP-IP-and-their-predecessor-NCP">https://www.quora.com/What-were-the-important-differences-between-TCP-IP-and-their-predecessor-NCP</a></li>
+    </ol>
+       </div>
+
+    </div>
+    </div>
+  </body>
+</html>

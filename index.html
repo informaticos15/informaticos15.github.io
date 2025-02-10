@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <meta content='Ivan Lopez Pedreañez' name='author'/>
+    <meta content='blog de informática, matematica, programación, microelectrónica, investigacion' name='description'/>
+    <meta content='informatica, sistemas, programacion, lenguajes programacion, matematica,electronica digital,investigacion, educacion, upel' name='keywords'/>
+
+    <link async='async' href='https://fonts.googleapis.com/css?family=Barriecito|Cabin+Sketch|Roboto|Arimo' rel='stylesheet'/>
+    <link async="async" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script> 
+
+    <script async="async" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link href="/manifest.json" rel="manifest"/>
+    <meta name="msapplication-TileColor" content="#6248cc">
+    <meta name="msapplication-TileImage" content="img/i15.ico">
+    <meta name="theme-color" content="#3d47d9">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="shortcut icon" href="img/i15.ico" type="image/x-icon">
+    <link rel="icon" href="img/i15.ico" type="image/x-icon">
+    
+    <meta class='swiftype' name='image' data-type='enum' content='img/i15.png' />
+    <meta name="image" content="img/i15.png">
+    <meta name="keywords" content="matematica, informatica, educacion, blog, programacion, sistemas, investigacion">
+    <meta name="author" content="Ivan Lopez Pedreanez">      
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Informaticos 15</title>
+
+
+    <script> 
+		$(document).ready(function(){
+
+		    $("#prog_lang_tag").click(function(){ 
+		    	$(".tag").slideUp();
+		    	$('.up').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');		    	  
+		    	$("#prog_lang_list").slideDown();
+		    	$("#prog_lang_tag > i").removeClass('fa-chevron-circle-up')
+		    						  .addClass('fa-chevron-circle-down');  });
+
+			$("#matematica_tag").click(function(){ 
+		    	$(".tag").slideUp()
+		    	$('.up').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up'); 		    	 
+		    	$("#matematica_list").slideDown(); 
+		    	$("#matematica_tag > i").removeClass('fa-chevron-circle-up')
+		    						  .addClass('fa-chevron-circle-down');  });
+
+		    $("#definiciones_tag").click(function(){ 
+		    	$(".tag").slideUp()
+		    	$('.up').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');  
+		    	$("#definiciones_list").slideDown(); 
+		    	$("#definiciones_tag > i").removeClass('fa-chevron-circle-up')
+		    						  .addClass('fa-chevron-circle-down');  });
+
+		    $("#tutoriales_tag").click(function(){ 
+		    	$(".tag").slideUp()
+		    	$('.up').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');   
+		    	$("#tutoriales_list").slideDown(); 
+		    	$("#tutoriales_tag > i").removeClass('fa-chevron-circle-up')
+		    						  .addClass('fa-chevron-circle-down');  });
+
+		    $("#educacion_tag").click(function(){ 
+		    	$(".tag").slideUp()
+		    	$('.up').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');   
+	    		$("#educacion_list").slideDown();
+		    	$("#educacion_tag > i").removeClass('fa-chevron-circle-up')
+		    						  .addClass('fa-chevron-circle-down');  });
+
+	    	$("#internet_tag").click(function(){ 
+		    	$(".tag").slideUp()
+		    	$('.up').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up'); 
+	    		$("#internet_list").slideDown();
+		    	$("#internet_tag > i").removeClass('fa-chevron-circle-up')
+		    						  .addClass('fa-chevron-circle-down');  });		           
+		                             });
+	</script>
+
+	
+  </head>
+
+  <body>
+  	<style type="text/css">
+		.jquery{color:gold;background-color: gold; font-family: barriecito;}
+	</style>
+
+    <div class="toptwo">    
+    </div>
+
+    <div class="container">
+        <!--------------------------------------------Head------------------------------------------------>
+      <div class="item head">
+	        <div class="back"> INFORMATICOS 15</div>
+	        <div id="a" class="lamina"></div>
+	        <div id="b" class="lamina"></div>
+	        <div id="c" class="lamina"></div>
+	        <div id="d" class="lamina"></div>
+	        <marquee id="marq">
+	  	       	<b>
+	  	          Bienvenido al Blog de la Cohorte 2015 de Informática de la UPEL-IMPM Yaracuy. Aquí encontrarás: Toda la 
+	  	            <a href="pensum.html">INFORMACIÓN</a> de las materias de la especialidad informática
+	  	          + <a href="pensum.html">CONTENIDOS</a> de otras materias generales
+	  	          + <a href="reglamentos.html"> NORMATIVAS</a> de la UPEL 
+	  	          + <a href='posts.html'> TIPS</a> de estudio 
+	  	          + <a href='recursos.html'> RECURSOS</a> de estudio 
+	  	          + <a href="libros-de-texto.html">LIBROS</a> de texto
+	  	        </b>
+	        </marquee>	      
+      </div>    
+        <!--------------------------------------------NavBar---------------------------------------------->
+      <div class="nav navbar15 flex-centrado" id='navbar15'>
+	        <ul class="nav45">  
+	          <li  class="flex-centrado" style='position: relative; left:-60px; top:-15px; z-index: 20000000'>
+	          	<div style="display:flex; flex-direction: row; justify-content: center;">
+		          	<a id='sider' style='margin-right:3vw;margin-top: 5px; font-size: 32px;color:var(--rojo)'> <i class="fa fa-bars"></i> </a>
+	          		<div id='nav_home' style='position: relative; top:'>
+	            		<a  href="#" class='flex-centrado'>
+	              			<img alt="informaticos 15" src="img/i15_mini.png">
+	            		</a>
+	            		<kbd style="letter-spacing: 1.3px">/home</kbd>
+	            	</div>
+	          	</div>
+	          </li>	          
+
+	           <li id='nav_heuristica' class='li45'><a href='a/heuristica.html' class='nav_links'><i class="fa fa-search"></i> Heurística</a>
+	            <ul>
+	              <li class='primera'><a href='investigacion/intro-investigacion.html'>Intro Investigación</a></li>
+	              <li><a href='investigacion/investigacion-educativa.html'>Invest. Educativa</a></li>
+	            </ul>
+	          </li>
+
+	          <li class='li45' id='nav_programacion'> <a href='a/programacion.html' class='nav_links'>{ } Programación</a> 
+	            <ul>
+	              <div id='programacion_div'>
+	                <div>              
+	                      <li><a href="programacion/estructura-de-datos-y-programacion-i.html"> Estruct de Datos I</a></li>
+	                    <li><a href="programacion/estructura-de-datos-y-programacion-ii.html"> Estruct de Datos II</a></li>
+	                    <li><a href="programacion/estructura-de-datos-y-programacion-iii.html"> Estruct de Datos III</a></li>
+	                </div>
+	                <div>
+	                    <li><a href="programacion/bases-de-datos.html"> Bases de Datos</a></li>
+	                    <li><a href="programacion/lenguajes-de-programacion-web.html"> Leng. de Program WEB</a></li>
+	                    <li><a href="programacion/internet-y-html.html"> Internet y HTML</a></li>            
+	                </div>
+	              </div>
+	            </ul>
+	          </li>	   
+	         	
+	  		    <li class='li45' id='nav_mat'><a href='a/matematica.html' class='nav_links'>∑ Matemática</a> 
+	            <ul>
+	              <div id='matematica_div'>
+	                <div>              
+	                    <li><a href='matematica/intro-calculo.html'>Intro al Cálculo</a></li>
+	                    <li><a href='matematica/intro-algebra.html'>Intro al Álgebra</a></li>
+	                    <li><a href='matematica/intro-algebra-lineal.html'>Álgebra Lineal</a></li>
+	                </div>
+	                <div>
+	                    <li><a href='matematica/calculo-integral-y-diferencial.html'>Cálculo Integral</a></li>
+	                    <li><a href='matematica/matematica-discreta.html'>Matemática Discreta</a></li>
+	                    <li><a href='matematica/eae.html'>Estadísticas</a></li>        
+	                </div>
+	              </div>              
+	            </ul>
+	          </li>
+	        
+	          <li class='li45' id='nav_sis'><a href='a/sistemas.html' class='nav_links'>ㅱ Sistemas</a>        	
+	          	<ul >
+	          		<div id='sis_div'>
+	          			<div id='sis_div2'>       
+	                </div>
+
+	          			<div id=''> 
+	  	        			  <li id='nav_iinf' class='img_sist_nav' data-img='0'><a href="http://informaticos15.blogspot.com/p/intro-informatica.html">Intro Informática</a></li>
+	  	             		<li id='nav_edig' class='img_sist_nav' data-img='1'><a href='sistemas/electronica-digital.html'>Electrónica Digital</a></li>
+	  	             		<li id='nav_sinf' class='img_sist_nav' data-img='2'><a href='sistemas/sistemas-de-info.html'>Sistemas de <br/>Información</a></li>
+	  	             		<li id='nav_scom' class='img_sist_nav' data-img='3'><a href='sistemas/redes-de-compu.html'>Sistemas de Computación</a></li>
+	  	             		<li id='nav_rinf' class='img_sist_nav' data-img='4'><a href='sistemas/redes-de-compu.html'>Redes Informáticas</a></li>
+	               		</div>
+	        			</div>
+	        		</ul>
+	          </li>
+
+	          <li class='li45' id='nav_bib'> <a href='a/biblioteca.html' class='nav_links'><i class="fa fa-book"></i>Biblioteca</a>
+	          	<div class='punta'>🔺</div>
+	             	<ul id='bib_div'>  
+	          			<li class='primera'><a href='/pensum-de-informatica-upel.html'>Pensum</a></li>
+	          		  <li><a href='/recursos.html'>Recursos</a></li>
+	          		  <li><a href='/libros-de-texto.html'>Libros de Texto</a></li>
+	          		  <li><a href='/planes-de-curso.html'>Planes de Curso</a></li>
+	          		  <li><a href='/reglamentos.html'>Reglamentos</a></li> 
+	             </ul>
+	          </li>
+
+
+
+	          <li class='li45'> <a href='a/workshops.html' class='nav_links'><i class="fa fa-connectdevelop" ></i> Workshops</a>
+	            <ul>
+	              <div class='workshops_menu' >
+	                <div class='primera'>
+	                  <a>Rey de Redes</a>
+	                  <img src="img/taller_redes.png" alt="taller-redes"/>
+	                </div>
+	                <div>
+	                  <a>Web Developer</a>
+	                  <img src="img/web_dev.png" alt="taller-web-developer"/>
+	                </div>
+	                <div>
+	                  <a>LAGIGF</a>
+	                  <img src="img/lacigf.png" alt="taller-lacigf"/>
+	                </div>
+	                <div>
+	                  <a>Automatizacion</a>
+	                  <img src="img/automatizacion.png" alt="taller-automatizacion"/>         
+	                </div>
+	              </div>
+	            </ul>
+	          </li>
+
+	          <li class='li45' id='nav_contacto'><a href='contacto.html'><i class="fa fa-phone-square"></i> Contacto</a></li>
+	        </ul>       
+      </div>
+        <!--------------------------------------------Side Bar------------------------------------------------>
+      <div class="item side" id='side'>
+        	<div class="item logos">
+        		<div class="logo i15">
+        			<p>Informaticos15</p>
+        			<img alt="informaticos15" src="img/i15.png"><!---->
+    	      </div>
+    	      <div class="logo upel"><!--UPEL--><img alt="UPEL" src="img/upel.jpg"><div><p>Universidad<p>Pedagogica<p>Experimental<p>Libertador</div>
+    	      </div>
+    	      <div class="logo impm"><!--IMPM--><img alt="IMPM" src="img/impm.png"><div><p>Instituto<p>Mejoramiento<p>Profesional<p>Magisterio</div>
+    	      </div>
+          </div>
+
+    	    <div class="item buscar flex-centrado">
+            <input>
+            <button><i class="fa fa-search"></i>Buscar</button>
+          </div>
+
+          <div class="item menuv flex-centrado">
+              <ul class='flex-centrado'>
+                <li class='nivel1'><a href='a/matematica.html' class='nivel1'>MATEMÁTICA</a>
+                  <ul>
+                    <li class='primera'><a href='matematica/intro-calculo.html'><i class="fa fa-caret-right"></i> Intro al Cálculo</a></li>
+                    <li><a href='matematica/intro-algebra.html'><i class="fa fa-caret-right"></i> Intro al Álgebra</a></li>
+                    <li><a href='matematica/intro-algebra-lineal.html'><i class="fa fa-caret-right"></i> Álgebra Lineal</a></li>
+                    <li><a href='matematica/calculo-integral-y-diferencial.html'><i class="fa fa-caret-right"></i> Cálculo Integral</a></li>
+                    <li><a href='matematica/matematica-discreta.html'><i class="fa fa-caret-right"></i> Matemática Discreta</a></li>
+                    <li><a href='matematica/eae.html'><i class="fa fa-caret-right"></i> Estadísticas</a></li>
+                  </ul>
+                </li>
+
+                <li class='nivel1'><a href='a/sistemas.html' class='nivel1'>SISTEMAS</a>
+                  <ul>
+                    <li class='primera'><a href='programacion/intro_informatica.html'><i class="fa fa-caret-right"></i> Intro Informática</a></li>
+                    <li ><a href='sistemas/electronica-digital.html'><i class="fa fa-caret-right"></i> Electrónica Digital</a></li>
+                    <li><a href='sistemas/sistemas-de-info.html'><i class="fa fa-caret-right"></i> Sist de Información</a></li>
+                    <li><a href='sistemas/redes-de-compu.html'><i class="fa fa-caret-right"></i> Sist de Computación</a></li>
+                    <li><a href='sistemas/redes-de-compu.html'><i class="fa fa-caret-right"></i> Redes Informáticas</a></li>
+                  </ul>
+                </li>
+
+                <li class='nivel1'><a href='a/programacion.html' class='nivel1'>PROGRAMACIÓN</a>
+                  <ul>                  
+                    <li class='primera'><a href='programacion/estructura-de-datos-y-programacion-i.html'><i class="fa fa-caret-right"></i> Estruc Datos Progr I</a></li>
+                    <li><a href='programacion/estructura-de-datos-y-programacion-ii.html'><i class="fa fa-caret-right"></i> Estruct Datos Progr II</a></li>
+                    <li><a href='programacion/bases-de-datos.html'><i class="fa fa-caret-right"></i> Bases de Datos</a></li>
+                    <li><a href='programacion/estructura-de-datos-y-programacion-iii.html'><i class="fa fa-caret-right"></i> Estruc Datos Progr III</a></li>
+                    <li><a href='programacion/internet-y-html.html'><i class="fa fa-caret-right"></i> Internet y HTML</a></li>
+                    <li><a href='programacion/lenguajes-de-programacion-web.html'><i class="fa fa-caret-right"></i> Lenguajes Progr Web</a></li>
+                  </ul>
+                </li>
+
+                <li class='nivel1'><a href='a/heuristica.html' class='nivel1'>HEURÍSTICA</a>
+                  <ul>
+                    <li class='primera'><a href='investigacion/intro-investigacion.html'><i class="fa fa-caret-right"></i> Intro Investigación</a></li>
+                    <li><a href='investigacion/investigacion-educativa.html'><i class="fa fa-caret-right"></i> Investig Educativa</a></li>
+                  </ul>
+                </li>
+                
+                <li class='nivel1'><a href='a/biblioteca.html' class='nivel1'>BIBLIOTECA</a>
+                  <ul>
+                    <li class='primera'><a href='/pensum-de-informatica-upel.html'><i class="fa fa-caret-right"></i> Pensum</a></li>
+                    <li><a href='/recursos.html'><i class="fa fa-caret-right"></i> Recursos</a></li>
+                    <li><a href='/libros-de-texto.html'><i class="fa fa-caret-right"></i> Libros de Texto</a></li>
+                    <li><a href='/planes-de-curso.html'><i class="fa fa-caret-right"></i> Planes de Curso</a></li>
+                    <li><a href='/reglamentos.html'><i class="fa fa-caret-right"></i> Reglamentos</a></li>
+                  </ul>
+                </li>
+                <li class='nivel1'><a href='a/workshops.html' class='nivel1'>WORKSHOPS</a>
+                  <ul>
+                    <li class='primera'><a href=''><i class="fa fa-caret-right"></i> Rey de Redes</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Web Developer</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> LACIGF</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Automatizacion</a></li>                  
+                  </ul>
+                </li>
+                 <li class='nivel1'><a href='a/snippets.html' class='nivel1'>SNIPPETS</a>
+                  <ul>
+                    <li class='primera'><a href=''><i class="fa fa-caret-right"></i> Pensum</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Recursos</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Libros de Texto</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Planes de Curso</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Reglamentos</a></li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
+
+          <div class='etiquetas'>
+	          	<div class="etiqueta">
+
+	          		<div id='educacion_tag'><i class="up fa fa-chevron-circle-up"></i>Estudio</div>   
+	          		<ul class='tag' id='educacion_list'>
+	          			<a href="" class="tagli">
+	          				<li>Mejora tu comprension lectora</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Por que es tan lento el internet en venezuela</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>3 Dimensiones para mejorar tu estudio</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Delitos Informaticos</li>
+	          			</a>
+	          		</ul>
+	          	</div>
+	          	<div class="etiqueta">
+	          		<div id='matematica_tag'><i class="up fa fa-chevron-circle-up"></i>Matematica</div>
+	          		<ul class='tag' id='matematica_list'>
+	          			<a href="" class="tagli">
+	          				<li>Evolucion historica del concepto de limite</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Nacimiento de geometria Analitica</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Limites </li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Geometria Analitica</li>
+	          			</a>
+	          		</ul>
+	          	</div>
+	          	<div class="etiqueta">
+	          		<div id='definiciones_tag'><i class="up fa fa-chevron-circle-up"></i>Definiciones</div>
+	          		<ul class='tag' id='definiciones_list'>
+	          			<a href="" class="tagli">
+	          				<li>TICS en Educacion</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Que es una red Informatica</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Paginas web y Software Educativo</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Videoconferencia</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Historia de Internet en Memes</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Ethernet</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Topologia en Redes</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Clasificacion de Redes/li>
+	          			</a>
+	          		</ul>
+	          	</div>
+	          	<div class="etiqueta">
+	          		<div id='tutoriales_tag'><i class="up fa fa-chevron-circle-up"></i> Tutoriales</div>
+	          		<ul class='tag' id='tutoriales_list'>
+	          			<a href="" class="tagli">
+	          				<li>Como hacer una pagina Web</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Conectar 2 computadoras con Linux</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Consola Linux</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Instalar LAMP</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Instalar Wordpress</li>
+	          			</a>
+	          		</ul>
+	          	</div>
+	          	<div class="etiqueta">
+	          		<div id='prog_lang_tag'><i class="up fa fa-chevron-circle-up"></i>Lenguajes de programacion</div>
+	          		<ul class='tag' id='prog_lang_list'>
+	          			<a href="" class="tagli">
+	          				<li>Aprende CSS</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>PHP: Caja Registradora</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Intro to SASS</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Angular 5</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Intro to Node.JS</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>Fundamentos de JQuery</li>
+	          			</a>
+	          		</ul>
+	          	</div>
+	          	<div class="etiqueta">
+	          		<div id='internet_tag'><i class="up fa fa-chevron-circle-down"></i>Internet</div>
+	          		<ul class='tag' id='internet_list'>
+	          			<a href="" class="tagli">
+	          				<li>FTP</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>DNS</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>TPC</li>
+	          			</a>
+	          			<a href="" class="tagli">
+	          				<li>IP: Protocolo de Internet</li>
+	          			</a>
+	          		</ul>
+	          	</div>
+         </div>
+
+          <div class="item twitter"   async='async'>
+	          <a class="twitter-timeline" data-lang="es" data-width="150%" data-height="100%" data-dnt="true" data-link-color="#3499fe" href="https://twitter.com/ivanguillermolp?ref_src=twsrc%5Etfw"></a> 
+	          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+          </div>
+      </div>
+      <!--------------------------------------------Main------------------------------------------------>
+      <div class="item main">
+      	<div class="item posts">
+  	        <div class="post uno">
+              <div class="post_descr">
+                <h4 id='prev0'> Internet</h4>
+                <center id='preview1' >
+                	<p>
+		            CUANDO QUEREMOS CONECTARNOS A FACEBOOK, suponiendo que tenemos una computadora conectada a INTERNET, (ya sea por red cableada, satelital o wifi) existe un proceso de diferentes capas y pasos que deben realizarse 
+		        	</p>
+		            <p>
+		            Facebook es un sitio web, el cual consiste de varias paginas web interconectadas. Cada pagina web es un documento escrito en un lenguaje de programación WEB llamado HTML.
+		        	</p>
+		            <p>
+		            Para poder visualizar la página web, se utiliza un navegador web, el cual es software que funciona como un interprete de los lenguajes de programación, y de esta manera permite visualizar la página como fue la intención del creador de la misma, e interactuar con ella.
+		        	</p>
+                </center>
+                <a id='prev_go' href=''>
+                  <button type="button" class='but15'>
+                  Ir al articulo
+                  </button></a>
+              </div>
+              <span id='prevvbut' class='prenext' style="left:15vw;"> <i  class="fa fa-chevron-left"> </i></span>            
+              <span id='nexttbut' class='prenext' style="left:66vw;"> <i class="fa fa-chevron-right"> </i></span> 
+            </div>
+  	    
+            <div class="post dos">
+              	<a href="">
+	              	<div class='miniimg flex-centrado'>
+	                  <h4>Dev Ops</h4>
+	                  <p>El término DevOps se refiere usualmente al movimiento profesional emergente que aboga por una relación colaborativa... </p>
+	             	</div>
+              	</a>
+            </div>
+            <div class="post tres">
+            	<a href="">
+	              	<div class='miniimg flex-centrado'>
+	                  <h4>Evolucion del Concepto de Limite</h4>
+	                  <p>Seguramente, estudiando matemática, alguna que otra vez te has encontrado con problemas para entender realmente... </p>
+	              	</div>
+	            </a>
+            </div>
+            <div class="post cuatro">
+            	<a href="">
+	            	<div class='miniimg flex-centrado'>
+	                  <h4>jQuery</h4>
+	                  <p>Las bases de la programación Web, cuanto a los Lenguajes de Programación son ... </p>
+	             	</div>
+            	</a>             	
+            </div>
+         
+
+  	        <div class="post txt1">
+              <img id='img1' alt='historia internet memes' src='p/hdiem.png'>
+              <h2> Historia de Internet en Memes</h2>
+              <p>Descubre <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style='text-decoration: none; color:black; text-shadow: 1px 1px white'> ¡
+                <b >AQUÍ</b>! </a> todo lo que debes saber sobre el Origen de los Memes de Internet.</p>
+            </div>
+         
+            <div class="post txt2">
+  	        	<a href="">
+  	        		<div class='minitxt flex-centrado'>
+	  	            	<h4>Protocolo de Transferencia</h4>
+	  	            	<p>Internet la entendemos como "un conjunto de redes informáticas internconectadas" la idea detrás de lograr... </p>
+  	          		</div> 
+  	          	</a>
+            </div>
+  	        <div class="post txt3">
+  	        	<a href="">
+	  	        	<div class='minitxt flex-centrado'>
+	  		        	<h4>Por qué el intenet es tan lento en vzla</h4>
+	              		<p>Para prácticamente cualquier usuario regular de internet en Venezuela no es un secreto que la conexión...</p>
+	  	          	</div>
+  	          	</a>            	
+            </div>
+  	        <div class="post txt4">
+  	        	<a href="">
+	  	        	<div class='minitxt flex-centrado'>
+	  		        	<h4>Nacimiento de la Geometria Analítica</h4>
+	  	            	<p>La geometría analítica es básicamente una ayuda de la geometría al álgebra y del álgebra a la geometría. La geometría confiere al álgebra...</p>
+	  	          	</div>
+	  	        </a>
+            </div>
+  	        <div class="post publicidad"></div>
+      	</div>
+          <!--------------------------------------------Post Scripts----------------------------------------->     
+        <script type="text/javascript">
+              const post_uno=[
+                ['Internet', 'internet.gif', `<p>CUANDO QUEREMOS CONECTARNOS A FACEBOOK, suponiendo que tenemos una computadora conectada a INTERNET, (ya sea por red cableada, satelital o wifi) existe un proceso de diferentes capas y pasos que deben realizarse </p>
+                <p>Facebook es un sitio web, el cual consiste de varias paginas web interconectadas. Cada pagina web es un documento escrito en un lenguaje de programación WEB llamado HTML.</p>
+                <p>Para poder visualizar la página web, se utiliza un navegador web, el cual es software que funciona como un interprete de los lenguajes de programación, y de esta manera permite visualizar la página como fue la intención del creador de la misma, e interactuar con ella</p>`],
+
+
+                ['TCP', 'TCP.png', `<p>Internet la entendemos como "un conjunto de redes informáticas internconectadas", la idea detrás de lograr está interconexión, era principalmente que entre computadores de todo el mundo pudieran compartirse información. </p>
+                 	<p>Para poder lograr esto, la comunicación entre los diferentes computadores, cada uno posiblemente con diferentes fabricantes, arquitecturas, etc. se necesitaba desarrollar, tal y como para la comunicación entre diferentes personas, un lenguaje común por medio del cual los computadores pudieran ponerse de acuerdo sobre como se llevaría a cabo el proceso de...</p>`],
+
+
+                ['FTP', 'FTP.png', `<p>Este protocolo de red para transferencia de archivos entre sistemas conectados a una red TCP basada en la arquitectura Cliente-Servidor. Independientemente del sistema operativo que se utilice en dos equipos, estos pueden conectarse para compartir archivos de audio, video, imágenes, texto, aplicaciones, etc. Además de la posibilidad de transmitir archivos, también permite visualizar directorios, cambiar el nombre o limitar derechos</p>`],
+
+
+                ['DNS', 'DNS.png', ` <p>El Sistema de Nombres de Dominio (DNS) es la guía telefónica de Internet. Las personas acceden a la información online a través de nombres de dominio, como wikipedia.org o espn.com. Los navegadores web interactúan a través de direcciones de Protocolo de Internet (IP). El DNS traduce nombres de dominio a direcciones IP para que los navegadores puedan cargar recursos de Internet.</p>
+                  <p>Cada dispositivo conectado a Internet tiene una dirección IP única que otras máquinas utilizan para encontrar el dispositivo. Los servidores DNS eliminan la necesidad de que los humanos memoricen direcciones IP como 192.168.1.1 (en IPv4), o direcciones IP alfanuméricas más complejas más nuevas, como... </p>`],
+
+
+                ['IP','IP.png', `<p>Es un protocolo de comunicación de datos digitales clasificado funcionalmente en la capa de red según el modelo internacional OSI.</p>
+                <p>Su función principal es el uso bidireccional en origen o destino de comunicación para transmitir datos mediante un protocolo no orientado a conexión que transfiere paquetes conmutados a través de distintas redes físicas previamente enlazadas según la norma OSI de enlace de datos.</p>
+                <p> El diseño del protocolo IP se realizó presuponiendo que la entrega de los paquetes de datos sería no confiable. Por ello, IP tratará de realizarla del mejor modo posible...
+                </p>`]  
+               ]
+
+              var prevvbut = document.getElementById('prevvbut');
+              var nexttbut = document.getElementById('nexttbut');
+           
+              var unopost=500;
+              var puno = document.querySelector('.uno');
+              var puno_t = document.getElementById('prev0');
+              var puno_c = document.getElementById('preview1');      
+
+              prevvbut.addEventListener('click', prevv);
+              nexttbut.addEventListener('click', nextt);
+
+              function prevv(){
+                unopost--;
+                up=unopost%5;
+                puno.style.background=`url('p/` + post_uno[up][1] + `')`;
+                puno.style.backgroundSize=`100% 100%`;
+                puno_t.innerHTML= post_uno[up][0];
+                puno_c.innerHTML= post_uno[up][2];        
+                };   
+              function nextt(){
+                unopost++;
+                up=unopost%5;
+                puno.style.background=`url('p/` + post_uno[up][1] + `')`;
+                puno.style.backgroundSize=`100% 100%`;
+                puno_t.innerHTML= post_uno[up][0];
+                puno_c.innerHTML= post_uno[up][2];        
+                }; 
+        </script> 
+          <!--------------------------------------------React Workshops-------------------------------------->
+  	    <div class="item workshops flex-centrado" id='talleres'>          
+  	    </div>
+  	    
+
+          <!--------------------------------------------PPTXS------------------------------------------------>
+  	    <div class="item pptxs">  
+	  	      <div class="pptx item1 flex-centrado" id='pptx_img0'/>
+	  	      	<a href="#id01">
+	              <div data-pptx='0' class="pptx_descr">a  </div>
+	            </a>
+	  	      </div>
+
+    		  <div class="pptx item2 flex-centrado" id='pptx_img1' />
+    		  	<a href='#id01'>
+              <div data-pptx='1' class="pptx_descr">  a  </div>
+            </a>
+    		  </div>
+
+    		  <div class="pptx item3 flex-centrado" id='pptx_img2' />		  	
+              <a href="#id01">
+                <div data-pptx='2' class="pptx_descr">a</div>
+              </a>        
+    		  </div>
+
+    		  <div class="pptx item4 flex-centrado" id='pptx_img3' />		  	
+              <a href="#id01">
+                <div data-pptx='3' class="pptx_descr">  a  </div>
+              </a>        
+    		  </div>
+
+    		    <div class="pptx item5 flex-centrado" id='pptx_img4' />          
+                <a href="#id01"><div data-pptx='4' class="pptx_descr">a</div>
+                </a>
+            </div>
+
+    		    <div class="pptx item6 flex-centrado" id='pptx_img5' />          
+                <a href="#id01"> <div data-pptx='5' class="pptx_descr">a</div>         
+                </a>          
+            </div>
+
+    		    <div class="pptx item7 flex-centrado" id='pptx_img6' />        
+              <a href="#id01">
+                <div data-pptx='6' class="pptx_descr">a</div>
+              </a>
+            </div>
+
+    		    <div class="pptx item8 flex-centrado" id='pptx_img7' />        
+              <a href="#id01">
+                <div data-pptx='7' class="pptx_descr">a</div>
+              </a>
+            </div>
+
+    		    <div class="pptx item9 flex-centrado" id='pptx_img8' />        
+              <a href="#id01">
+                <div data-pptx='8' class="pptx_descr">a</div>
+              </a>
+            </div>
+
+    		    <div class="pptx item10 flex-centrado" id='pptx_img9'/>        
+              <a href="#id01">
+                <div data-pptx='9' class="pptx_descr">a</div>
+              </a>
+            </div>
+
+    		    <div class="pptx item11 flex-centrado" id='pptx_img10'>        
+              <a href="#id01">
+                <div data-pptx='10' class="pptx_descr">a</div>
+              </a>
+            </div>
+
+    		    <div class="pptx item12 flex-centrado" id='pptx_img11'/>        
+              <a href="#id01">
+                <div data-pptx='11' class="pptx_descr">a</div>
+              </a>
+            </div>
+
+    		    <div class="pptx item13 flex-centrado" id='pptx_img12'/>          
+                <a href="#id01">
+                  <div data-pptx='12' class="pptx_descr">a </div>
+                </a>          
+            </div>
+
+    		    <div class="pptx item14 flex-centrado" id='pptx_img13'/>         
+                <a href="#id01">
+                   <div data-pptx='13' class="pptx_descr">a </div>
+                </a>          
+            </div>
+    		    
+            <div class="pptx item15 flex-centrado" id='pptx_img14'/>          
+                <a href="#id01">
+                  <div data-pptx='14' class="pptx_descr"> a  </div>             
+                </a>          
+            </div>
+            
+    		<div class="item16">
+              <h2>Presentaciones Educativas</h2>
+              <p>Ponemos a tu disposicion diferentes libros, ebooks, presentaciones, etc. de corte educativo realizados en su por nosotros con clara intencion pedagogica usando al maximo los recursos digitales y basados en las teorias sobre tecnicas didacticas mas actuales, sobre todos los temas que se abordan en este sitio
+              </p> 
+            </div>
+  	    </div> 
+          <!--------------------------------------------PPTX shower modal------------------------------------>
+        <div id="id01" class="modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <header class="containerheader">
+                    <a href='#pptxs' class="closebtn" onclick='closemodal'>×</a>
+                    <h2 id='pptx_shower_tit'>Didactica</h2>
+                  </header>
+                  <div class="containercontainer">
+                    <iframe id='pptx_shower_frame' 
+                            src="https://docs.google.com/presentation/d/e/2PACX-1vTmKY3bmFhkl5eT-oWLOA-bACxfNE1DDFZjg2-J3UkiLRAuQdwvsCP_wln94J273pllbQ4Gj9HWI7pa/embed?start=false&loop=false&delayms=3000" 
+                            frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+                    </iframe>
+                  </div>
+                  <footer class="containerfooter">
+                    <p style='color:var(--rosa)'>by Ivan Guillermo Lopez</p>
+                    <div id="percent-loaded" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">                    
+                    </div>
+                  </footer>
+                </div>
+              </div>
+        </div>
+  	  </div>
+      <!--------------------------------------------Footer------------------------------------------------>
+  	  <div class="item foot flex-centrado">
+       <div>  
+  	   <center class="rrss">
+          <a href="https://www.facebook.com/" rel="noopener"><div class='flex-centrado'><i class="fa fa-facebook-official"></i></div></a>
+          <a href="https://www.instagram.com/informaticos15" target="_blank" rel="noopener"><div class='flex-centrado'><i class="fa fa-instagram"></i></div></a>
+          <a href="https://twitter.com/ivanguillermolp" target="_blank" rel="noopener"><div class='flex-centrado'><i class="fa fa-twitter"></i></div></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener"><div class='flex-centrado'><i class="fa fa-youtube"></i></div></a>
+       </center> 
+       <br/>  
+       </div>   
+  	   <p>por <a href="https://ivanguillermo.github.io">Ivan Guillermo Lopez Pedreañez</a></p>     
+       </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    	var dots = document.getElementById('nav2_more')
+    	var nav3 = document.getElementById('nav2_more_ul')
+
+    	function navtwomore(){
+    		nav3.style.display='flex';
+    		nav3.style.width='60vw';
+    	}
+
+    	dots.addEventListener('mouseover', navtwomore)
+    </script>
+
+    <nav class='navtwo'>
+    	<ul style="width:84vw">
+			<li class="nav2_li"><img src='informaticos15.png' style='width: 22vw; border-radius: 4px'/></li>
+			<li class="nav2_li">Matematica</li>
+			<li class="nav2_li">Programacion</li>
+			<li class="nav2_li">Sistemas</li>
+			<li class="nav2_li">Heuristica</li>
+			<li id='nav2_more' style='background-color: var(--rojo); font-size: 16px; width:8vw; '> ... 
+				<ul id='nav2_more_ul' style="
+					display: none;
+					position: absolute;
+					left:60vw;
+					width:40vw;
+					align-self: flex-start;
+					align-content:  flex-start;
+					justify-content: space-between;
+					padding: 0;
+					height:45vh;
+					margin:0;
+					background-color: #333; 
+					flex-flow: column wrap; 
+					z-index: 80;">					
+					<li class="nav2_li2">Posts</li>
+					<li class="nav2_li2">Workshops</li>
+					<li class="nav2_li2">Biblioteca</li>
+					<li class="nav2_li2">Contacto</li>
+				</ul>
+			</li>		
+		</ul>
+
+		
+    </nav>
+
+    <style type="text/css">
+
+    </style>
+
+    <script type="text/javascript">
+    	var dots = document.getElementById('nav2_more')
+    	var nav3 = document.getElementById('nav2_more_ul')
+
+    	function navtwomore(){
+    		nav3.style.display='flex'
+    	}
+
+    	dots.addEventListener('mouseover', navtwomore)
+    </script>
+  </body>
+      <!--------------------------------------------Page Distribution style------------------------------------------------>
+    <style>
+      :root {
+      --azul:#3499fe;
+      --rosa:#D1215F;
+      --verde:#00f2bf;
+      --rojo:#ea4335 ;
+      --amarillo:#ffa151;
+      --gris:#7c7c7c;
+      --azulM:#045FB4;
+      --morado:#6248cc;
+      --modalcolor: #232323;
+      --modH:65vh;
+     }
+      html{font-family: 'Roboto'; font-weight: 500}
+      body{overflow-x:hidden;}
+      ul {list-style:none;}
+
+      p a:link{text-decoration: none}
+
+      .flex-centrado{ display:flex;  justify-content: center; align-items: center; align-content: center; }
+      
+
+      .item{border: 0px solid black;}
+      .container {
+        position: absolute; 
+        top: 0px; 
+        margin:0px;
+        left:0px;
+        display: grid;
+        width:100%;
+        grid-gap: 0.5px;
+        grid-template-columns: auto 1fr 1fr;
+        grid-template-rows: 250px 50px auto 100px;
+        grid-template-areas:
+          "head   head   head"
+          "nav    nav    nav"
+          "side   main   main"
+          "foot   foot   foot"
+      }
+    </style>
+      <!--------------------------------------------Head Style------------------------------------------------>
+    <style> 
+      .head {
+        grid-area: head;
+        background:var(--morado);
+      
+      }
+        #a,#b {transition: left 1s;}
+        #c,#d {transition: right 1s, z-index 0s;}
+
+        .back {z-index:0;  height: 250px; position: relative;top: -10px;
+        			background-image:url('informaticos15.png');background-repeat: repeat;background-size:64% 93%;background-position:top center;
+              animation-name: gify;
+              animation-duration: 5s;
+              animation-iteration-count: infinite;         
+
+        }
+
+          @-webkit-keyframes gify {            
+              0% {filter: hue-rotate(0deg)} 25% {filter: hue-rotate(90deg)} 50% {filter: hue-rotate(180deg)} 75% {filter: hue-rotate(90deg)} 100% {filter: hue-rotate(0deg)}          
+            }
+            /* Add animation (Standard syntax) */
+            @keyframes gify {                      
+               0% {filter: hue-rotate(0deg)} 25% {filter: hue-rotate(90deg)} 50% {filter: hue-rotate(180deg)} 75% {filter: hue-rotate(270deg)} 100% {filter: hue-rotate(360deg)} 
+            }
+
+        .lamina{  position: absolute;  top: 0;    
+          width:80%;  height: 250px; padding: 0px; 
+          background-repeat: no-repeat; background-size:100% 100%;
+          transition-timing-function: cubic-bezier(0.25,0.1,0.25,1); z-index:3
+        }
+
+        #a{left:-62%;z-index:2; background-color:white; background-position: right  center;}
+
+        #b{left:-71%; z-index:3; background-color:var(--verde);background-position: right  center;}
+
+        #c{right:-62%; z-index:2; background-color:var(--rojo);background-position: left  center;}
+
+        #d{right:-71%; z-index:3; background-color:var(--azul);background-position: left  ;}
+
+        #marq {padding-top:6px; position: absolute;  left:15%; top: 220px; height:24px; width:80%; font-size:12px; z-index:1;
+        background-color:var(--morado); color:white; font-family:"Courier New"}
+
+        #marq b{margin-top:20%;vertical-align: middle}
+        #marq b a{color:rgb(25,20,30);}
+
+        #a:hover,  #b:hover{left:0%;;}
+        #c:hover, #d:hover{right:0%;z-index:3;}      
+
+        #a{background-image:url('programacion.png');}
+        #b{background-image:url('matematica.png');;}
+        #c{background-image:url('heuristica.png');}
+        #d{background-image:url('sistemas.png');}
+    </style>
+      <!--------------------------------------------Navbar style------------------------------------------------>
+    <style>
+          /*div de navegacion*/
+          body.fixed-nav #navbar15 {
+            position:fixed;
+            box-shadow: 2px 3px rgba(0,0,0,0.2);
+            z-index:2000;
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+            height:50px;
+          }
+
+
+          .navbar15 {
+            grid-area: nav;
+            width:100%;
+            background: var(--azul);
+            font-weight: 600;
+            color:white;     
+          }
+
+          /*ul de la navbar*/
+          .nav45{
+            display: flex;      
+            justify-content: space-between;
+            align-items: flex-start;
+            align-content: flex-start;      
+
+            height:100%;
+            width: 95%;
+            
+          }
+
+          /*elementos de la navbar*/
+          .nav45 > li {
+                  display: inline-block;            
+                  align-self: center;
+                  text-align: center;
+                  
+                  position: relative;
+                  left:-6%;
+                  padding-top:15px;
+                  height:30px;
+
+                  margin-right:3px;
+                  top:0px;
+                  min-width:13%; 
+                   
+                  text-align: center;              
+                  font-size:12px;           
+                  
+                  transition: all 0.25s; 
+                  }
+               
+                      
+              .li45:hover {background: #ffffff32; letter-spacing:105%; border:2px solid white; transition: 0s; border-radius: 22px 22px;  }
+              .nav_links:link{text-decoration: none; color:white;}
+              .nav_links:visited{color:white;} 
+              
+              .nav45 li:hover > ul {display:block; z-index:2;}
+
+          /*ul de matematica programacion sistemas heuristica*/
+          .nav45 li ul { 
+                      display:none; 
+                      position:relative;
+                      background: white; 
+                      padding:0px; 
+                      margin:0px;
+                      border-radius:1px 5px;
+                      box-shadow: 1px 50px 100px rgba(50,50,93,.1), 0 15px 35px rgba(50,50,93,.15), 0 5px 15px rgba(0,0,0,.1);}
+
+          .nav45 li ul a {letter-spacing:0px; padding:0% 2%;text-decoration: none;}
+          
+          .nav45 li ul li {position:relative; font-size:13px; height:45px; padding-top:10%;}
+          .nav45 li ul li a{color:black; font-weight: 700;}   
+          
+          .nav45 li ul li:hover {background: var(--rosa); font-size:85%; width:120%; left:-10%; border:4.5px solid black; }             
+          .nav45 li ul li:hover *{color:white; }
+
+
+          .side {
+            grid-area: side;
+            position:relative;
+            width:200px;
+            transition: all 1s;         
+            display:grid;
+            grid-template-rows: 4fr 1fr auto auto 4fr;
+            grid-template-areas:
+                "logos"
+                "buscar"
+                "menuv"
+                "etiquetas"
+                "twitter"
+          }
+
+          .logos {
+            grid-area: logos;
+            display:flex; flex-flow: column wrap; justify-content: space-around; align-items: center;
+          }
+            .logo p::first-letter, .logo p br::first-letter {color: var(--rojo);font-weight: 800; font-size: 110%;}
+            .logo {display:flex; justify-content: center; align-items: stretch;margin-left:5%;font-size: 12px;}
+            .logo div {line-height: 40%}
+            .logo img {width:50%}
+
+          .i15 {flex-flow: column-reverse wrap; align-items: center;margin: 0%}
+          .i15 p{margin-left: 10%;font-family: Barriecito; font-size: 200%;}
+          .i15 img{width:100%}
+
+          .upel img {margin-right: 1%}
+          .impm img {margin: 0% 0% 0% 0%; ;height: 100%} 
+
+          .buscar {
+            grid-area: buscar;
+            flex-flow: column wrap;      
+          }
+
+          .menuv {
+            grid-area: menuv;
+            width:100%;
+          }
+
+          .menuv {flex-flow: column wrap; text-align: center; font-size:14px; background-color:var(--azulM);}
+          .menuv ul{flex-flow: column wrap; list-style: none; position:relative; left:-10%;}
+          .menuv ul li.nivel1 {width: 100%;}
+          .menuv ul li.primera {border-top: 1px solid #fff;}
+          .menuv ul li a {display:block;text-decoration:none;color:#fff;background-color:var(--azulM);border-bottom:double 1px #fff;padding:4%;margin:4%;position: relative;}
+          .menuv ul li:hover {position: relative; color: #000;}
+          .menuv ul li a:hover, .menuv ul li:hover a.nivel1 { background-color: #6E6E6E; color: #000; position: relative;}
+          .menuv ul li a.nivel1 {display: block !important; display: none; position: relative;}
+          .menuv ul li ul {display: none;}
+          .menuv ul li a:hover ul, .menuv ul li:hover ul {display: block;position: relative;top: -1px;}
+          .menuv ul li ul li a {width: 130px; background-color: white; color: #000; left: -42px; font-size:12px;text-align: left; }
+          .menuv ul li ul li a:hover {position: relative; background-color: #6E6E6E; color: #000; }
+          .fa-caret-right {color: white;}
+
+          .etiquetas{
+          	grid-area: etiquetas;
+          	font-size: 12px;
+          	padding-left: ;
+          	padding-top:1.5vh;
+          }
+          .etiqueta div {padding-left: 6%; padding-top:4px; background: var(--rojo);margin:0;z-index: 12px;height:3.5vh;font-weight: 400; color:white;border-bottom:3.5px double #111a;}
+
+          .etiqueta div:before{content:; border-radius:2.5px 2.5px; border:2px solid white;width: 5px; height: 3px; margin-right: 2px}
+
+          .etiqueta ul{display:none;}
+          .fa-chevron-circle-up, .fa-chevron-circle-down{margin-right:2px;}
+
+          .tagli{list-style-image: url(img/i15.ico); font-family: Cabin Sketch;color:var(--azulM);}
+          #internet_list{display:block;}
+
+          .twitter{
+            grid-area: twitter;
+          }
+    </style>    
+      <!--------------------------------------------Navbar animations------------------------------------------------>
+    <style>
+            #nav_home{align-self: center; padding-top: 0px; height:45px  }
+            #nav_home a img {border-radius:50%; background: white; width:32px; margin: 0px 2px}
+
+            #nav_heuristica ul{position: relative; top:18px;}
+            
+            #nav_programacion ul{margin:0%; padding: 0%;}
+
+            #programacion_div::before{background-color: transparent; content:'</>';width:20px;height: 20%;font-size: 40px;margin:32% 2%;}
+            #programacion_div{
+              -webkit-animation-name: programacion; /* Chrome, Safari, Opera */
+              -webkit-animation-duration: 0.3s; /* Chrome, Safari, Opera */
+              animation-name: programacion;
+              animation-duration: 0.3s;
+                        
+              transition: all 0.5s; 
+              top:16px;
+              width:400px; 
+              background: var(--rojo); 
+              height:200px; 
+              position: absolute; 
+              left:-150px;
+              border:2px solid black;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              margin:0%;
+              padding: 0%;
+              border-top:3px solid var(--azul);
+              }
+
+            #programacion_div div, #programacion_div div li a{
+              display:flex;            
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              align-content: center;
+              color:white;
+              margin:0%;
+              padding:0%;
+              width:150px;
+              height:60px;
+              padding: 0px;
+              align-self: center;
+            }
+
+            #programacion_div div li{display:flex; align-content: center; justify-content: center; align-items: center;}
+
+            #programacion_div div li{margin:0%;}
+            #programacion_div div li:hover { ;background:white;top:0px; left:0px; border-radius: 30px;}
+            #programacion_div div li:hover > a{color:var(--rojo);font-size: 13px; text-align: center;align-self: center; top:0px;}
+            #nav_programacion:hover > ul #programacion_div{width:500px;}
+
+            #nav_mat *{z-index:800;font-size: 12px;}  
+
+            #matematica_div{            
+              transition: all 1s; 
+              position: absolute;           
+              width: 60vw; 
+              height:50vh; 
+              top:15px; 
+              left:-344px;
+              transform:skewY(-7deg);           
+
+              background: transparent;
+              border-bottom:38px groove rgba(35, 229, 56, 0.6);
+              box-shadow: 15px 0.8px rgba(35, 189, 56, 0.5);             
+
+              display:flex;
+              justify-content: space-between;
+              align-items: stretch;
+              align-content: center;
+              margin:0%; padding: 0%;
+              color:var(--rojo);
+              border-radius: 50%;
+              }
+
+            #matematica_div div{
+              height:150%;
+              display:flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items:center; 
+              align-content: flex-start;            
+              width:35%;
+            }
+
+            #matematica_div div:nth-child(1) li:nth-child(1)
+            {align-self: flex-start; margin-left:0px;margin-top: 10px; }
+
+            #matematica_div div:nth-child(2) li:nth-child(3)
+            {align-self: flex-start; margin-right:0px;margin-bottom: 25px; }
+
+            #matematica_div div:nth-child(1) li:nth-child(3)
+            {align-self:flex-end; margin-left:0px; margin-bottom: 25px;}
+
+            #matematica_div div:nth-child(2) li:nth-child(1) 
+            {align-self:flex-end; margin-right:0px;margin-top: 10px;}
+
+            #matematica_div div:nth-child(1) li:nth-child(2) 
+            { margin-right:30px;margin-top: 10px;}
+
+            #matematica_div div:nth-child(2) li:nth-child(2) 
+            {margin-right:-30px;margin-top: 10px;}
+
+            #matematica_div div li{width:30%; height:12%; border:2px solid var(--rosa); border-radius: 50%; background-color: white;
+              box-shadow: 8px 4px rgba(0,0,0,0.4)}
+            
+            #matematica_div div li:hover {background:var(--rosa);top:0px;left:0px;}
+            #matematica_div div li:hover > a{color:white;}         
+
+
+            @-webkit-keyframes programacion {
+              from {left:-500px;opacity: 1;}
+              to {left:-50px;opacity:1;}            
+            }
+            /* Add animation (Standard syntax) */
+            @keyframes programacion {
+              from {left:-500px;opacity: 1;}            
+              to {left:-50px;opacity:1;}
+            }
+
+            .punta{
+             background-color: transparent;  
+             width:100%; 
+             height: 100px;
+             font-size: 45px; 
+             color:white;           
+             z-index: 1000;
+             padding-top: -25px;
+             display:none;
+            }
+
+            #bib_div{top:-60px;}
+            #bib_div li:hover{top:0px;;}
+            #nav_bib:hover > .punta{display:block;}
+
+            #nav_sis ul{top:18px;}
+            #nav_sis ul li{border-right:5px solid var(--azul);width:200px;} 
+            #nav_sis ul li:hover{box-shadow: 5px 5px rgba(0,0,0,0.4);left:-4px;} 
+            #sis_div {display: flex; background-color: white; box-shadow: -5px 4px #0007; position: absolute;left:-40vw;}
+            #sis_div2 {
+              display: block; 
+              background-color: 
+              transparent; 
+              width:900px;
+              background: url('sistemas.png'); 
+              background-size: 900px 340px; 
+              background-repeat: no-repeat;
+            }
+         
+            .workshops_menu{
+              top:18px;
+              width:80vw; 
+              background: white; 
+              height:36vh; 
+              position: absolute; 
+              left:-900px;
+              border:2px solid black;
+              display:flex;
+              justify-content: space-around;
+              align-items: center;
+            }
+            .workshops_menu div{
+              width:20%;
+              height:24vh;
+              border:2px solid rgb(33,33,33,0.1);
+              color:var(--rojo);
+              box-shadow:0.48px 0.41px #1115; ;
+            }
+            .workshops_menu div img{padding-top: 2%}
+            .workshops_menu div img:hover{width:100%;height:85%;}
+
+            #nav_contacto:hover{background: #44ff4488;font-size: 105%; transition: font-size 0.3s}
+            
+            #nav_contacto a {color:white; text-decoration: none}
+    </style>
+      <!--------------------------------------------Posts style------------------------------------------------>
+    <style>
+       .txt1{grid-area:txt1;font-size:15px; background: #3499fe; overflow: hidden;}
+            .txt1 h2{color:black; text-shadow: 1px 1px black}
+            .txt1 img{float:left; width:25%; margin:1% 1%; height:80%;}
+       .txt2{grid-area:txt2; background-image: url('p/IP.png')}
+       .txt3{grid-area:txt3; background-image: url('p/internet-en-vzla.png')}
+       .txt4{grid-area:txt4; background-image: url('p/geomet_analit.png')}          
+
+       .post_descr{background:#fff; visibility:hidden; 
+                   width:100%;height:100%;
+                   transition:all 0.8s;opacity:0.1;
+                   text-align:center;
+                   font-size:8px;
+                   display:flex;
+                        
+                  justify-content: center;
+                  align-items: center;
+                  }
+
+       .post_descr p{
+              padding:0% 10%;
+              font-size: 135%;
+              line-height: 120%;
+              padding-top:2px;
+            }
+        #preview1, #preview1 p, #preview1 *{
+        	display: flex;
+        	justify-content: center;
+        	flex-direction: column;
+            height:35vh;
+            width:42vw;
+            font-size: 13px;
+           	white-space: wrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: justify;
+            font-family: Arimo;
+            }
+
+       .post:hover > .post_descr{visibility:visible;opacity:0.8}
+       .post div {
+            font-size:12px;      
+            width:98%; 
+            height:100%; 
+            margin-top:0px;
+            overflow: hidden;
+            padding-left: 2%;     
+            flex-direction: column;
+            }
+        
+        .prenext{height:380px;width:70px;display:flex; justify-content: center; align-items: center; align-content: center; z-index:1;position:absolute;top:320px;font-weight: 800; color:var(--morado); font-size: 40px;text-shadow: 2px 2px solid black;transition: all 1s;;}
+
+        a .minitxt{ 
+        	background-color: white;
+        	white-space: wrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom:12px;
+            color:#111;
+        }
+
+        .miniimg{ background-color: transparent; color:white;}
+        .miniimg{display: none}
+        .post:hover > a .minitxt {background-color: transparent; font-size: 105%; text-shadow:1px 1px white; text-align: center} 
+        .post:hover > a .minitxt p {display:none;}     
+        .post:hover > a .miniimg {background-color: var(--morado); opacity: 0.9 ;text-shadow:1px 1px black; text-align: center} 
+        .post:hover > a .miniimg {display:flex;}     
+    </style>
+      <!--------------------------------------------Navbar Animation Script------------------------------------------------>
+    <script>
+        const img_sist=[
+          'intro_informatica', 'electronica_digital', 'sistemas_informacion', 'sistemas_computacion',  'redes_informaticas'  
+        ]
+        const imgsistnav = Array.from(document.querySelectorAll('.img_sist_nav'));
+        var z = document.querySelector('#sis_div2');
+
+        imgsistnav.forEach( isn => isn.addEventListener('mouseover', imgsistnavchange))
+        imgsistnav.forEach( isn => isn.addEventListener('mouseout', imgsistnavchangeback))
+
+        function imgsistnavchange(){
+          var i = this.dataset.img ;
+         
+
+          z.style.background=`url('img/pptx/` + img_sist[i] + `.png')`;
+          z.style.backgroundSize=`900px 330px`;   
+        }
+        function imgsistnavchangeback(){
+          z.style.background=`url('sistemas.png')`;
+          z.style.backgroundSize=`900px 330px`; 
+        }
+    </script>
+      <!--------------------------------------------Main Style----------------------------------------------->
+    <style>
+        .main{
+          grid-area: main;
+          background:white;
+          display: grid;
+            margin:1%;
+            border-radius:4px;
+            border:1px solid #aaa;
+          width:98%;
+          grid-gap: 0px;
+            grid-template-columns: 1fr;
+            grid-template-rows: 80vh 1fr auto;
+            grid-template-areas:
+              "posts"
+              "workshops"
+              "pptxs"
+        }
+
+        .posts{
+          grid-area: posts;
+          display: grid;
+            padding:0%;
+          width:100%;
+          grid-gap: 2px;
+          grid-template-columns: 66.6% 1fr 1fr;
+          grid-template-rows: repeat(4, 20vh);
+          grid-template-areas:
+              "uno dos txt2"
+              "uno txt3 tres"
+              "uno cuatro txt4"
+              "txt1 publicidad publicidad"
+        }
+
+            .post{background-repeat: no-repeat; background-size: 100% 100%; background-position: center center; flex-direction: column;}
+            .post div{border:0.2px solid #0003;}
+              .uno   {grid-area:uno; display: flex; flex-direction: row ;  background-image: url('p/internet.gif'); background-size: 97% 97%;}
+              
+              .dos   {grid-area:dos;    background-image: url('p/DevOps.png'); background-position: center center; background-size: 90% 90%;  animation-duration: 1.8s;animation-iteration-count: infinite; }
+
+                .tres  {grid-area:tres;   background-image: url('p/evolucion_concepto_limite.png');
+                animation-name: zooming; animation-duration: 4.8s;animation-iteration-count: infinite;}
+
+                .cuatro{grid-area:cuatro; background-image: url('p/jQuery.png');}
+              
+                .publicidad{grid-area:publicidad; font-size:12px;background-image: url('img/LP_Freelancers.png');}
+
+         @-webkit-keyframes zooming{ 
+          from{background-size: 100% 85%;} to {background-size: 170% 85%; background-position-x: 102%}
+         }
+        @keyframes zooming{ 
+          from{background-size: 100% 85%;} to {background-size: 170% 85%;background-position-x: 102%} 
+        }
+
+        .workshops {
+          grid-area: workshops;
+          width:100%;      
+          text-align:justify;
+          align-items: center;
+          justify-content: center;
+          align-content: center;
+        }
+
+        .workshop_tit{border: 0px solid blue;
+          font-style: italic;
+          letter-spacing: 2.5px;    
+          display:inline-flex;
+          text-align: center;
+          padding:0 25px;
+          margin:0px;
+          height:100%;font-size: 58px; 
+          background:white; top:155px;
+          position:relative; 
+          left:-150px;
+          transform-origin:; 
+          transform: rotate(-90deg); -webkit-transform:rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3));
+		  background: transparent;
+        }
+        #Talleres{
+        }
+
+        .talleres{      
+          display:inline-flex;
+          align-items: center; 
+          flex-flow: row wrap;     
+          justify-content: space-around;
+          background:var(--amarillo);
+          min-width:60vw;
+          width:90%;
+          margin: 1% 0% 3% 0%;
+          border: 0px solid blue;
+          position: relative;
+          top:0%;
+          left:6vw;
+        }
+        .talleres *{padding: 1% 0%;}
+        .talleres img{margin-top:10%;width: 10vw;}
+
+        .taller{
+          width:15vw;
+          margin:0.3vw;
+          display:flex;
+          flex-flow: column wrap;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+        }
+        .pptxs{
+          grid-area: pptxs;
+          background:var(--rosa);
+          
+          display: grid;
+          width:98%;
+          grid-gap:0;
+          grid-template-columns: repeat(12, 1fr);
+          grid-template-rows: 2fr repeat(5, 1fr) ;
+          grid-template-areas:
+            " t  t  t   t   t   t  t   t   t   t   t   t"
+            " . pf  pf  .   .  pd  pd  .   pc  pc  pc  ."
+            "vc vc  .  ib  ib  ib  va  va  pc  pc  pc  ."
+            "ia ia  ia ib  ib  ib   .  ic  ic  .   p   p"
+            "ia ia  ia  .  ph  ph  pe  pe  .   pa  pa  pa"
+            " . pg  pg  vb vb  .   .   pb  pb  pa  pa  pa"              
+        }
+        .pptx{
+        	background-size:100% 100%; 
+        	background-position: center center; 
+        	background-repeat: no-repeat; 
+        	border:0.8px solid white;
+        	width:100%;
+        }
+           .pptx_descr{ 
+              background-color: #fffc;
+              visibility:hidden;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+              align-content: center;
+              transition:all 0.5s;
+              opacity:0.1;
+              width: 11vw;
+              height: 6.5vw;
+              text-align:center;                                
+              overflow: hidden ;
+              color: var(--azul);
+              font-size: 14px;
+              margin:1vw 0;
+            }
+          a:link {text-decoration: none;} 
+          .pptxs div a:hover > .pptx_descr{visibility:visible; opacity:1}
+
+                     
+          .item1{grid-area: pa; background-image:url("img/pptx/administracion_bases_datos.png");}
+          .item2{grid-area: pb; background-image:url("img/pptx/algebra_lineal.png")}
+          .item3{grid-area: pc; background-image:url("img/pptx/datos_no_agrupados.png")}
+          .item4{grid-area: pd; background-image:url("img/pptx/derivada.png")}
+          .item5{grid-area: pe; background-image:url("img/pptx/didactica.png")}
+          .item6{grid-area: pf; background-image:url("img/pptx/electronica_digital.png")}
+          .item7{grid-area: pg; background-image:url("img/pptx/estructura_datos_2.png")}
+          .item8{grid-area: ph; background-image:url("img/pptx/estructura_datos_3.png")}
+          .item9{grid-area: va; background-image:url("img/pptx/funciones.png")}
+          .item10{grid-area: vb; background-image:url("img/pptx/historia_internet_memes.png")}
+          .item11{grid-area: vc; background-image:url("img/pptx/html_5.png")}
+          .item12{grid-area: ia; background-image:url("img/pptx/internet.png")}
+          .item13{grid-area: ib; background-image:url("img/pptx/lenguajes_programacion.png")}
+          .item14{grid-area: ic; background-image:url("img/pptx/redes_informaticas.png")}
+          .item15{grid-area: p; background-image:url("img/pptx/seguridad_informatica.png")}
+          .item16{grid-area: t; text-align:center;font-size:18px; color:white;line-height:160%; }
+            .item16 h2{text-shadow: 2px 0px 2px rgba(20,20,20,0.7)}
+            .item16 p {font-size: 16px;padding: 0% 13%}
+
+
+        /* Add animation (Chrome, Safari, Opera) */
+              @-webkit-keyframes example {
+                from {top:-100px;opacity: 0;}
+                to {top:200vh;opacity:1;}           
+              }
+              /* Add animation (Standard syntax) */
+              @keyframes example {
+                from {top:-100px;opacity: 0;}
+                to {top:200vh;opacity:1;} 
+              }
+
+              /* The modal's background */
+              .modal { 
+                display:none;                
+                position: absolute;
+                
+              	align-items: center;
+              	align-content: center;
+              	justify-content: center; 
+                top:0px;
+                left:0px;
+
+                width: 100vw; 
+                height: 100vh; 
+                overflow: auto; 
+                background-color: #000c; 
+                z-index:80;
+              }
+
+              /* Display the modal when targeted */
+              .modal:target {display: block;position: fixed;}
+
+              /* The modal box */
+              .modal-dialog {
+              	display: flex;
+              	align-items: center;
+              	align-content: center;
+              	justify-content: center;
+              	position: relative;
+              	top:50px;}
+              /* The modal's content */
+              .modal-dialog .modal-content {
+                background-color: var(--modalcolor);            
+                border: 1px #777 solid;
+                text-align: justify;
+                width: 72vw;
+                
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 12px 12px;
+
+                /* Add animation */
+                -webkit-animation-name: example; /* Chrome, Safari, Opera */
+                -webkit-animation-duration: 3s; /* Chrome, Safari, Opera */
+                animation-name: example;
+                animation-duration: 3s;
+              }
+			
+              #pptx_shower_frame{width: 65vw;height: var(--modH)}
+
+              /* The button used to close the modal */
+              .closebtn {
+              	text-decoration: none;
+              	float: right;
+              	font-size: 35px;
+              	font-weight: bold;
+              	color: black;}
+              .closebtn:hover, .closebtn:focus {color: var(--rojo);text-decoration: none;cursor: pointer;}
+              .containercontainer {
+              	display: flex;
+              	align-items: center;
+              	align-content: center;
+              	justify-content: center;
+              }
+              header {background-color: white; font-size: 25px;color: black; padding:0px 10px;}
+              footer {background-color: white; font-size: 20px;color: black; padding:0px 5px;} 
+    </style>
+      <!--------------------------------------------Foot Style----------------------------------------------->
+    <style>
+        .foot {
+        grid-area: foot;
+        width:100%;
+        background: #232323;
+        flex-flow: column wrap;
+        }
+
+        .rrss{
+              border-color: black;
+              text-align:center;
+              height:8vh;
+              color:white;
+              display: flex; flex-wrap: wrap; justify-content: space-around; align-items: stretch;
+              margin: 0px 10px;
+              font-size:18px;
+            }
+
+            .rrss *{color:white; font.-size:24px; text-decoration: none;}
+            .rrss div{ border:3px double white; border-radius:50%; width:45px; height: 45px;text-align:center; margin: 0px 30px;}
+            .rrss div:hover {background:var(--rosa);}
+          .foot p {color:white;}
+          .foot p a {color:var(--rosa);}
+      
+        .toptwo{display:none;}
+        .navtwo{
+    		background-color: var(--azul);
+    		display:none; 
+    		flex-flow: column wrap; 
+    		justify-content: space-between;
+    		padding:0px 0px 0px 0px
+    	}
+        
+    </style>
+      <!--------------------------------------------Media Queries----------------------------------------------->
+    <style>
+          @media (max-width: 1000px) { 
+            .container{
+              grid-template-columns:1fr ;
+              grid-template-rows: 200px 70px 1vh;
+              grid-template-areas:
+              "toptwo" 
+              "navtwo" 
+              "main"
+            }        
+            .side,.side *,.head,.head *, .foot, .foot *,.navbar15 {display:none}  
+
+            .workshop_tit{display:none;}
+            
+            .item16 p {font-size: 13px;padding: 0% 10%}
+
+            .toptwo{display:flex; grid-area:toptwo;
+             height: 200px; position: relative;
+             background-image:url('informaticos15.png');background-repeat: no-repeat; background-size:100% 100%; background-position:center center;
+                animation-name: gify;
+                animation-duration: 5s;
+                animation-iteration-count: infinite; 
+            } 
+            .navtwo{
+            	display:flex;            	
+            	grid-area:navtwo;  
+            	height: 70px;          	
+            }
+            .navtwo ul{
+            	display: inline-flex;
+            	flex-flow: row wrap;
+            	justify-content: space-between;
+            	align-content: center;
+            	align-items: center; 
+            	font-size: 14px;
+            	font-weight: 500;
+            	color:white;
+            	text-align: center;
+            	width: 100vw;
+            	height: 70px;
+            }
+
+
+    	.nav2_li2{
+    		display: flex;
+    		justify-content: center; 
+    		align-content: center; 
+    		align-items: center; 
+    		border-top:4px solid var(--azulM);
+    		width:100%;
+    		height:8vh;    		
+			color:white;
+			font-size: 16px;
+    		}
+
+    	#nav2_more_ul{display:; z-index: 80;}
+
+    	#nav2_more:hover > ul{display:flex}
+
+           .prenext{display:none;} 
+           #preview1{font-size: 11px} 
+           .item16 p {font-size: 12px;padding: 0% 9s%}   
+
+          }
+
+          @media (max-width: 900px) { 
+            .taller{
+            width: 40%;  
+            flex-flow: column wrap;
+            align-items: center;
+            justify-content: center;
+            font-size:90%;
+                  }
+            .taller img {width:100px;}
+            .item16 p {font-size: 12px;padding: 0% 9%}
+	          }
+	          #img1{display: none}
+
+	          header, footer {font-size: 20px;}
+          @media (max-width: 700px) {       
+          .main{
+            grid-template-columns: auto;
+            grid-template-rows: 120vh 1fr auto;
+          }
+
+          .posts{
+            grid-template-columns: repeat(4, 24vw);
+            grid-template-rows: 50vh repeat(2, 20vh);
+            grid-template-areas:              
+              "uno    uno    uno    txt1"
+              "dos    txt2   tres   txt3"
+              "cuatro txt4 publicidad publicidad"
+          }
+
+          .nav2_li2{font-size: 11px;}
+
+          #preview1{        	
+            height:48vh;
+            width:70vw;
+            }
+
+          .item16 p {font-size: 12px;padding: 0% 7%}
+
+          .talleres
+          {
+          	align-items: center;			
+			justify-content: center;			
+			margin: -25% -6% 5% 0%;			
+			display: flex;
+			position: relative;
+          }
+
+          .but15_info{display: none}
+
+
+          .pptxs{
+            grid-area: pptxs;
+            height:110vh;
+            grid-gap:0px;
+            grid-template-columns: repeat(3, 32vw);
+            grid-template-rows: 0.5fr repeat(3, 22vw) ;
+            grid-template-areas:
+              " t  t   t "              
+              " ic pg pe "
+              " vb ib ia "
+              " pf ph va "                                          
+           }
+           .pptx{width: 32vw; margin:0;height:22vw;}
+
+           .modal-dialog{margin-top: 30vh;}
+           .modal-content{height: 40vh}
+           .modal-dialog, .containercontainer, #pptx_shower_frame{height: 35vw;}
+           #percent-loaded{display:none;}
+
+
+
+          .item1, .item2, .item3, .item4, .item11, .item15{display:none} 
+         }
+
+          @media (max-width: 500px) { 
+          .container {
+            grid-template-columns: 1fr;
+            grid-template-rows:70px auto 110px;
+            grid-template-areas:
+            "navtwo"
+            "main"
+            "foot"
+          }
+          .main{
+            grid-template-columns: auto;
+            grid-template-rows: 120vh auto auto;
+          }
+		  .foot, .foot *{display: flex}
+          
+          .toptwo{display: none}
+          .navtwo{height: 70px}
+
+          .talleres{
+          	align-items: center;			
+			justify-content: center;			
+			margin-top: 2vh ;	
+			display: inline-flex;
+			position: relative;
+          }
+
+          .txt2, .txt3, .txt4, .publicidad {display:none;}
+          .posts{
+            grid-template-columns: repeat(2, 50vw);
+            font-size:8px;
+            grid-template-rows: 50vh repeat(3, 1fr);
+            grid-template-areas:
+              "uno  uno "
+              "txt1 txt1 "
+              "dos  tres " 
+              "cuatro cuatro"
+            }
+          .but15{width:80px;padding:5% 15%; font-size: 10px;}
+             
+          
+          .item16{font-size:10px;}
+
+           .rrss{          
+              height:5vh;  
+              margin: 0px 6px;
+              font-size:14px;
+            }
+            .rrss *{color:white; font.-size:16px;}
+            .rrss div{ border:3px double white; border-radius:50%; width:30px; height: 30px;
+                      margin: 0px 12px;}
+                    }    
+           }  
+    </style>
+      <!--------------------------------------------Side hidden script------------------------------------------------>   
+    <script>
+      var home = document.getElementById('sider');
+      home.addEventListener('click', side);
+
+      var sideb=document.getElementById('side');
+
+      var x = 0;
+    	function side(){
+        x++;
+        if(x%2 > 0){
+    	sideb.style.left='-220px';
+        sideb.style.width='0px';
+        prevvbut.style.left='0vw';
+        nexttbut.style.left='61vw';    
+        }
+        else
+        {
+        sideb.style.left='0px';
+        sideb.style.width='200px';
+        prevvbut.style.left='15vw';
+        nexttbut.style.left='66vw';
+        }
+        
+    	}    
+    </script>
+      <!--------------------------------------------Fixed Nav script------------------------------------------------>
+    <script>
+    	const navs = document.querySelector('#navbar15');  
+      const topOfNav = navs.offsetTop;  
+      
+      function fixNav(){
+      if(window.scrollY >= topOfNav)
+        {
+        document.body.style.paddingTop = document.querySelector('#navbar15').offsetHeight + 'px';
+        document.body.classList.add('fixed-nav');
+        }
+      else 
+        {
+        document.body.classList.remove('fixed-nav')
+        document.body.style.paddingTop = 0
+        }
+      }
+      window.addEventListener('scroll', fixNav);
+    </script>    
+      <!--------------------------------------------React Workshops script------------------------------------------------>
+    <script type="text/babel">
+        function Talleres(props){
+        return(
+          <div>
+            <h2 className="workshop_tit" > Workshops </h2>
+            <Workshops/>
+          </div>
+          )
+        }
+
+        function Workshops(props){
+        var etapas = [ 
+            [' Red de Redes', ' Protocolos', ' Dispositivos'],
+            [' ISOC', ' IPv6', ' Venezuela'],
+            [' HTML', ' CSS', ' JavaScript'],
+            [' Aire', ' Electronico', ' PLC']  
+            ]
+          return(
+          
+          <div className="item talleres" >                  
+            <Taller title='Rey de Redes' src='img/taller_redes.png' e={etapas[0]}/>
+            <Taller title='LACIGF' src='img/lacigf.png' e={etapas[1]}/>
+            <Taller title='Web Dev' src='img/web_dev.png' e={etapas[2]}/>
+            <Taller title='Automatizacion' src='img/automatizacion.png' e={etapas[3]}/>
+          </div>
+          )
+        }        
+
+        function Taller(props){
+        
+          return (
+                  <div className="taller"> 
+                    <b>{props.title}</b>
+                    <img src= {props.src} />
+                    <Partes txt={props.e}/>
+                    <button className="but15_info"><i className="fa fa-external-link"></i> Ver </button>
+                  </div>)
+        };
+
+        
+
+        function Partes(props){     
+           ;         
+          return(
+                 <ul >
+                  <Etapa  p={props.txt[0]}/>                
+                  <Etapa  p={props.txt[1]}/>                
+                  <Etapa  p={props.txt[2]}/>
+                 </ul>
+          )
+        };
+
+        function Etapa(props){
+         
+          var a = 2;
+          return (
+          <li className='partes'> 
+            <i className="fa fa-arrow-circle-right"></i>  
+            <b>{props.p}</b>
+          
+          </li> )
+        };     
+
+        ReactDOM.render(
+            <Talleres/> ,
+            document.getElementById("talleres")
+        );
+    </script>
+      <!--------------------------------------------React Workshops Style------------------------------------------------>
+    <style>
+        .fa-arrow-circle-right{
+            padding-right: 12px;
+          }
+        .but15{
+        width:150%;padding:15% 25%; border-radius: 8px 8px; background-color: transparent; border:2px double skyblue;
+        }
+        .but15_info{
+        width:;padding:5% 15%; font-weight: 600; border-radius: 8px 8px; background-color: #fff; border:2px double skyblue; word-spacing:2px ;
+        }
+        .tlinks{padding:2.5px;}
+        .tlinks:link{text-decoration:none; color:var(--rosa); font-weight: 400}
+        .tlinks:visited{text-decoration:none; color:var(--rosa); font-weight: 400} 
+    </style>
+      <!--------------------------------------------Pptx shower Script------------------------------------------------>
+    <script>
+          var pptxs=
+                [
+                  ["datos_no_agrupados", "Datos no agrupados", 'https://docs.google.com/presentation/d/e/2PACX-1vRndRh69UxkKMdnXo-8NJuSvBFVhPO-vALoLAyaacHHZVURx8OxoYz-jZB30PoLCX65PiN6oJyoqfo3/embed?start=false&loop=false&delayms=3000'],
+
+                  ["derivada","Derivadas",  'https://docs.google.com/presentation/d/e/2PACX-1vSyWsf67g0hTONcUMN-tlXjAzHyoatA-u-C7agtV6wQFEuLCA4tvK-6cTSDPDXPebKOsZMGQjvIryZk/embed?start=false&loop=false&delayms=3000'],
+
+                  ["didactica", "Didactica",'https://docs.google.com/presentation/d/e/2PACX-1vSrG0GkskW6HR6z9hgkoQmq61UE_K81Stogr5Gwished9Sdox20PcrAhxSQOUgkB8bgsG6ZE4puXZ01/embed?start=false&loop=false&delayms=3000'],
+
+                  ["electronica_digital","Electronica Digital",'https://docs.google.com/presentation/d/e/2PACX-1vRCdEw85JiDkLsdGDjVVrpFDcH6LuojqAz1mFoUstDeq6tGMqHmp-FPmtmEsxrKz2eDYLChZzOK40h2/embed?start=false&loop=false&delayms=3000'],
+
+                  ["estructura_datos_2",  "Estructura Datos 2",'https://docs.google.com/presentation/d/e/2PACX-1vTvtZBStPW16UbZ9pm_eiW4ClMdjDyuINHmPNSrfpEHMUQeFfozknVf_f0HMbaPiHwxsTBayHZFo2NU/embed?start=false&loop=false&delayms=3000'],
+
+                  ["estructura_datos_3","Estructura Datos 3",'https://docs.google.com/presentation/d/e/2PACX-1vQH3_0WnKUT0V1Yv0xtszTMSixMEPiTDE4qqgduPSwj74Nu4f-Mm4yOdNtz2elLW_-G6TLeEXp7lcbn/embed?start=false&loop=false&delayms=3000'],
+
+                  ["funciones","Funciones", 'https://docs.google.com/presentation/d/e/2PACX-1vSz7Cuhk4abHtZCby7C-H_7-U0FK1A0ZEU9QM63VLlC2G8A2cMcqLvHf_uJcWhB0nEped-yKDxmLLm3/embed?start=false&loop=false&delayms=3000'],
+
+                  ["historia_internet_memes","Historia de Internet en Memes", 'https://docs.google.com/presentation/d/e/2PACX-1vQPbOEJmlAOhqGZSgWI6dw-PstlNQATLjnEIe2nfLtMsZvwWeYnLDlwK3EQnvzpHslfUiZzsjuVi6kc/embed?start=false&loop=false&delayms=3000'],
+
+                  ["html_5","Html 5",'https://docs.google.com/presentation/d/e/2PACX-1vQHrgHWROF9aBOBFFVIsHSAH8JEaKBTTym0SvWLFwbLY-fux7zqb9SHVodZcGgG_jSELyLfCI_57BRU/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["internet","Internet", 'https://docs.google.com/presentation/d/e/2PACX-1vT92Kk4Ia9bVM_KUDWjPZIxGK1GRfKsamNTG64hrnjzaqWuPsizgdy0BE5bfCqzi-pIvup_ZgbQaPdn/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["lenguajes_programacion","Lenguajes Programacion", 'https://docs.google.com/presentation/d/e/2PACX-1vSrG0GkskW6HR6z9hgkoQmq61UE_K81Stogr5Gwished9Sdox20PcrAhxSQOUgkB8bgsG6ZE4puXZ01/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["redes_informaticas","Redes Informaticas",'https://docs.google.com/presentation/d/e/2PACX-1vRAlK7AeyzoJK5lwLl1hWMmMEC8I5UNCqmYKEP9qVR7ouxsbCdX6b8-OxDop1m6mhO19qD3isMGcLxA/embed?start=false&loop=false&delayms=3000' ],
+                  
+                  ["seguridad_informatica","Seguridad Informatica",'https://docs.google.com/presentation/d/e/2PACX-1vTln-XIH3L6AA91-Wt06pqcIN2GRXL2zrdYEC6JGfqy84qeab7V0ncvbOWwCYuhYDi8UO2a1xvWmdBc/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["sistemas_admin_bases_datos","Sistemas Administracion de Bases de Datos",'https://docs.google.com/presentation/d/e/2PACX-1vQFM-zsk_a02vf1T59ro4oyOSms2iMjAtvXqd5qsHjQ35z5jtTIUK9Jtz-ozzoBuHcMwUJ99DAN5dPy/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["sistemas_computacion","Sistemas Computacion", 'https://docs.google.com/presentation/d/e/2PACX-1vT4JQ4EusltX1FKSGTd2SHYEzEp4og2H1w0BLzDZl0dikc2KpWy9pKqtUoRDNFT3l4-ByrdHTocLDKU/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["algebra_lineal","Algebra Lineal",'https://docs.google.com/presentation/d/e/2PACX-1vQigbVB0nQvCYmtF98IFbdtMBvPW_dXVKOyUSL5JSm-BHBV3_aWVDAFfFJnZ97N7OfPAztX8bDoa8gS/embed?start=false&loop=false&delayms=3000'],
+                  
+                  ["analisis_real","Analisis Real",'https://docs.google.com/presentation/d/e/2PACX-1vSQlqtbpmqs8zowSuKU5soFBENDuOmN3Xhg_PzfD2Y0EI403KlXVVaGhL9Nv-EMx8zTKHWQmMXxr-Uc/embed?start=false&loop=false&delayms=3000'],
+
+                  ["descartes", "Descartes",'https://docs.google.com/presentation/d/e/2PACX-1vTNBdAb2wgOK10TA61NemgvqSR_YY9uNiz1XSM5_xfakTRqhZ9PjztwHvUCDSJiYDLfmwYgxjwylESL/embed?start=false&loop=false&delayms=3000']
+                ];
+                
+          var yes = Array.from(document.querySelectorAll('.pptx_descr'));
+           
+           var shower = document.getElementById('pptx_shower_frame');
+           var shower_tit = document.getElementById('pptx_shower_tit');
+
+
+          function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+            while (0 !== currentIndex) {
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+            return array;         
+          }
+         
+          // Used like so 
+          function pptxs_change(){
+            ranpptxs = shuffle(pptxs); 
+            var i;
+            for (i = 0; i < 15; i++) {
+                  let sx= 91 + (Math.floor(Math.random()*7));
+                  
+                  document.getElementById(`pptx_img`+`${i}`).style.backgroundImage='url("img/pptx/'+ pptxs[i][0] +'.png")';
+                  document.getElementById(`pptx_img`+`${i}`).style.backgroundSize= ''+ sx +'% '+ sx +'%';
+                  yes.forEach ( text => text.innerHTML = pptxs[text.dataset.pptx][1] + '' );
+                                                           
+                }                    
+                       
+          };     
+
+            var closebtn = document.querySelector('.closebtn');
+			var modald = document.getElementById('id01');
+
+			function closemodal(){
+				modald.style.display='none';
+			}
+
+			closebtn.addEventListener('click', closemodal)             
+          
+            function show(){
+              var j = this.dataset.pptx;           
+              var k = pptxs[j][2];
+              var l = pptxs[j][1];
+              shower.src = k ;
+              shower_tit.innerHTML = l;  
+              modald.style.display='';            
+            }
+
+            yes.forEach( pptxy => pptxy.addEventListener('click', show));
+            
+          pptxs_change();  
+          setInterval(pptxs_change, 10000)
+    </script>
+    
+</html>
