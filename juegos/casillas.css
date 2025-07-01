@@ -3,9 +3,10 @@
 body {
   font-family:  Roboto, Arial, sans-serif;
   text-align: center;
-  background: #f8f9fa;
+  background: white;
   padding: 10px;
-  background: var(--color);
+  background: ;
+  ;
 
 }
 
@@ -36,7 +37,7 @@ h2 { color: #333; }
 #numero {
   margin-top: 20px;
   font-size: 8em;
-  color: white;
+  color: var(--color);
   font-family: Lobster;
 }
 #marcador, #tiempo, #record, #total {
@@ -49,6 +50,20 @@ select, button {
   margin-top: 15px;
   padding: 8px 12px;
   font-size: 1em;
-  background: white;
-  border-radius: 2px;
+  background: var(--color);
+  color:white;
+  
 }
+.btn{
+          background-color: transparent;
+          border-color: var(--color);
+          color:var(--color);
+        border-radius: 5px;}
+          
+.btn:hover
+         {
+            background-color:var(--color);
+            color:white;
+         } 
+
+
