@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Juego Matemático</title>
+  <link rel="stylesheet" href="estilo.css">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link href="ops.ico" rel="shortcut icon" type="image/x-icon" />
+   <link href="ops.ico" rel="icon" type="image/x-icon" />
+   <meta content='Practica y Aprende las operciones Matematicas' name='description'/>
+      
+   <link async="async" href="" rel="stylesheet" />
+  
+   <link async="async" href="https://fonts.googleapis.com/css?family=Nova+Square|Roboto|Raleway|Satisfy|Lobster" rel="stylesheet" />
+</head>
+<body>
+
+<h2 id="titulo" style="color:white">Selecciona <span style="color:white">5</span> operaciones que den como resultado:</h2>
+<div id="numero"></div>
+
+<div>
+  <label for="modo"></label><b>Modo:</b></label>
+  <select id="modo">
+    <option value="clasico">🎯 Clásico</option>
+    <option value="aventura">🗺️ Aventura</option>
+  </select>
+
+  <select id="nivel" >
+    <option value="1">Nivel 1</option>
+    <option value="2">Nivel 2</option>
+    <option value="3">Nivel 3</option>
+    <option value="4">Nivel 4</option>
+    <option value="5">Nivel 5</option>
+    <option value="6">Nivel 6</option>
+    <option value="7">Nivel 7</option>
+  </select>
+  <button onclick="iniciarJuego()">Iniciar</button>
+</div>
+
+<div class="grid" id="tablero"></div>
+
+<div id="marcador">
+  ✅ Aciertos: <span id="aciertos">0</span> |
+  ❌ Errores: <span id="errores">0</span> |
+  🎯 Intentos: <span id="intentos">0</span>|
+
+</div>
+
+<div id="tiempo">⏱ Tiempo restante: <span id="reloj">60</span>s</div>
+
+<div id="total">
+  🏅 Puntos acumulados (modo aventura): <span id="puntosTotales">0</span>
+  <span id="record">📈 Récord: <span id="recordValor">0</span></span>
+</div>
+
+<script src="juego.js"></script>
+
+</body>
+</html>
+
