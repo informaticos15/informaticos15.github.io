@@ -13,66 +13,10 @@
    <link async="async" href="" rel="stylesheet" />
   
    <link async="async" href="https://fonts.googleapis.com/css?family=Nova+Square|Roboto|Raleway|Satisfy|Lobster" rel="stylesheet" />
-<style>
-  :root{--color:#4fdb98;}
-
-body {
-  font-family:  Roboto, Arial, sans-serif;
-  text-align: center;
-  background: #f8f9fa;
-  padding: 10px;
-  background: var(--color);
-
-}
-
-h2 { color: #333; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(8, 120px);
-  gap: 5px;
-  justify-content: center;
-  margin-top: 5px;
-}
-
-.cell {
-  border: 2px solid #555;
-  padding: 20px;
-  background: #fff;
-  font-weight: bold;
-  font-size: 1.2em;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  border-color: black;
-}
-
-.cell.correct { background: #b2fab4; }
-.cell.wrong { background: #fab2b2; }
-
-#numero {
-  margin-top: 20px;
-  font-size: 8em;
-  color: white;
-  font-family: Lobster;
-}
-#marcador, #tiempo, #record, #total {
-  margin-top: 10px;
-  font-size: 1.2em;
-  color: #222;
-}
-
-select, button {
-  margin-top: 15px;
-  padding: 8px 12px;
-  font-size: 1em;
-  background: white;
-  border-radius: 2px;
-}
-</style>
 </head>
 <body>
-
-<h2 id="titulo" style="color:white">Selecciona <span style="color:white">5</span> operaciones que den como resultado:</h2>
+<center>
+<h2 id="titulo" style="color:var(--color)">Selecciona <span style="">5</span> operaciones que den como resultado:</h2>
 <div id="numero"></div>
 
 <div>
@@ -91,7 +35,7 @@ select, button {
     <option value="6">Nivel 6</option>
     <option value="7">Nivel 7</option>
   </select>
-  <button onclick="iniciarJuego()">Iniciar</button>
+  <button class="btn" onclick="iniciarJuego()">Iniciar</button>
 </div>
 
 <div class="grid" id="tablero"></div>
@@ -109,7 +53,7 @@ select, button {
   🏅 Puntos acumulados (modo aventura): <span id="puntosTotales">0</span>
   <span id="record">📈 Récord: <span id="recordValor">0</span></span>
 </div>
-
+</center>
 <script src="casillas.js"></script>
 
 </body>
