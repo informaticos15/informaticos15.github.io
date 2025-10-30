@@ -121,7 +121,7 @@ boddy.innerHTML +=`
                 </div>
                 <div>
                   <a>LAGIGF</a>
-                  <img src="img/lacigf.png" alt="taller-lacigf"/>
+                  <img src="img/google_sheets.png" alt="curso-sheets"/>
                 </div>
                 <div>
                   <a>Automatizacion</a>
@@ -206,7 +206,7 @@ boddy.innerHTML +=`
                   <ul>
                     <li class='primera'><a href=''><i class="fa fa-caret-right"></i> Rey de Redes</a></li>
                     <li><a href='/'><i class="fa fa-caret-right"></i> Web Developer</a></li>
-                    <li><a href='/'><i class="fa fa-caret-right"></i> LACIGF</a></li>
+                    <li><a href='/'><i class="fa fa-caret-right"></i> Sheets</a></li>
                     <li><a href='/'><i class="fa fa-caret-right"></i> Automatizacion</a></li>                  
                   </ul>
                 </li>
