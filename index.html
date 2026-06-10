@@ -2024,36 +2024,6 @@
           setInterval(pptxs_change, 10000)
     </script>
 
-	<script>
-  const navs = document.querySelector('#navbar15');  
-  let topOfNav; // La declaramos arriba, pero sin darle valor aún
-
-  function calcularPosicion() {
-    // Esto asegura obtener el valor real con imágenes y estilos ya renderizados
-    topOfNav = navs.offsetTop;  
-  }
-
-  // EVENTO CRUCIAL: Se ejecuta cuando TODO (incluyendo imágenes arriba del nav) terminó de cargar
-  window.addEventListener('load', () => {
-    calcularPosicion();
-    fixNav(); // Ejecución inicial por si el usuario recarga la página ya habiendo bajado
-  });
-
-  // Si el usuario cambia el tamaño de la pantalla, recalculamos el punto de quiebre
-  window.addEventListener('resize', calcularPosicion);
-      
-  function fixNav(){
-    // Le restamos 2px de cortesía para evitar los errores de redondeo de decimales en Chrome
-    if (window.scrollY >= (topOfNav - 2)) {
-      document.body.style.paddingTop = navs.offsetHeight + 'px';
-      document.body.classList.add('fixed-nav');
-    } else {
-      document.body.classList.remove('fixed-nav');
-      document.body.style.paddingTop = 0;
-    }
-  }
-
-  window.addEventListener('scroll', fixNav);
-</script>
+	
     
 </html>
