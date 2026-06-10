@@ -1824,7 +1824,15 @@
     <script>
     	const navs = document.querySelector('#navbar15');  
       const topOfNav = navs.offsetTop;  
-      
+
+		body.fixed-nav #navbar15 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que quede por encima de todo */
+}
+		
       function fixNav(){
       if(window.scrollY >= topOfNav)
         {
