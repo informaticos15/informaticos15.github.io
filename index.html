@@ -893,14 +893,7 @@
         #d{background-image:url('sistemas.png');}
     </style>
       <!--------------------------------------------Navbar style------------------------------------------------>
-	<script>function fixNav(){
-			  if (window.scrollY >= (topOfNav - 2)) {
-			    document.body.classList.add('fixed-nav');
-			  } else {
-			    document.body.classList.remove('fixed-nav');
-			  }
-			}
-	</script>
+	
     <style>
           /*div de navegacion*/
          body.fixed-nav #navbar15 {
@@ -1838,26 +1831,14 @@
     	}    
     </script>
       <!--------------------------------------------Fixed Nav script------------------------------------------------>
-    <script>
-    	const navs = document.querySelector('#navbar15');  
-      const topOfNav = navs.offsetTop;  
-
-		
-		
-      function fixNav(){
-      if(window.scrollY >= topOfNav)
-        {
-        document.body.style.paddingTop = document.querySelector('#navbar15').offsetHeight + 'px';
-        document.body.classList.add('fixed-nav');
-        }
-      else 
-        {
-        document.body.classList.remove('fixed-nav')
-        document.body.style.paddingTop = 0
-        }
-      }
-      window.addEventListener('scroll', fixNav);
-    </script>    
+   <script>function fixNav(){
+			  if (window.scrollY >= (topOfNav - 2)) {
+			    document.body.classList.add('fixed-nav');
+			  } else {
+			    document.body.classList.remove('fixed-nav');
+			  }
+			}
+	</script>  
       <!--------------------------------------------React Workshops script------------------------------------------------>
     <script type="text/babel">
         function Talleres(props){
