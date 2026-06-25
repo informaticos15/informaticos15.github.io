@@ -893,9 +893,17 @@
         #d{background-image:url('sistemas.png');}
     </style>
       <!--------------------------------------------Navbar style------------------------------------------------>
+	<script>function fixNav(){
+			  if (window.scrollY >= (topOfNav - 2)) {
+			    document.body.classList.add('fixed-nav');
+			  } else {
+			    document.body.classList.remove('fixed-nav');
+			  }
+			}
+	</script>
     <style>
           /*div de navegacion*/
-          body.fixed-nav #navbar15 {
+         body.fixed-nav #navbar15 {
             position:fixed;
             box-shadow: 2px 3px rgba(0,0,0,0.2);
             z-index:2000;
@@ -903,14 +911,23 @@
             border-top: 2px solid black;
             height:50px;
           }
-
-
+          .fixed-nav .navbar15 {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			z-index: 999; /* Asegura que esté por encima de todo */
+			}
+		  .fixed-nav {
+			/* Debes ajustar este valor según la altura real de tu navbar */
+			padding-top: 50px; 
+		   }
           .navbar15 {
             grid-area: nav;
             width:100%;
             background: var(--azul);
             font-weight: 600;
-            color:white;     
+            color:white;  
+            transition: all 0.3s;   
           }
 
           /*ul de la navbar*/
