@@ -82,10 +82,16 @@ async function loadArticles() {
 }
 
 // FUNCIÓN PARA CARGAR EL ARTÍCULO DENTRO DE LA MISMA PÁGINA (SPA)
-function openArticle(docUrl) {
-  if (!docUrl || docUrl.trim() === '') {
-    alert("Este artículo no tiene una URL de Google Doc configurada.");
+function openArticle(docId) {
+  if (!docId || docId.trim() === '') {
+    alert("Este artículo no tiene un ID de Google Doc configurado en la hoja de cálculo.");
     return;
+  }
+
+  let cleanDocId = docId.trim();
+  if (cleanDocId.includes('/d/')) {
+    const match = cleanDocId.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) cleanDocId = match[1];
   }
 
   const homeSections = document.getElementById('homeSections');
@@ -94,18 +100,15 @@ function openArticle(docUrl) {
 
   homeSections.style.display = 'none';
   articleViewer.style.display = 'block';
-  articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido...</p>';
+  articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido del artículo...</p>';
 
-  // Asegurar parámetro embedded
-  let finalUrl = docUrl.trim();
-  if (!finalUrl.includes('embedded=true')) {
-    finalUrl += (finalUrl.includes('?') ? '&' : '?') + 'embedded=true';
-  }
+  const docUrl = `https://docs.google.com/document/d/${cleanDocId}/pub?embedded=true`;
 
   articleContent.innerHTML = `
     <iframe 
-      src="${finalUrl}" 
-      style="width: 100%; height: 800px; border: none; background: white;">
+      src="${docUrl}" 
+      style="width: 100%; height: 800px; border: none; background: white;"
+      onload="console.log('Artículo cargado con éxito');">
     </iframe>
   `;
 
@@ -151,7 +154,26 @@ async function loadWorkshops() {
     { Titulo: 'Automatización', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
   ];
 
-  
+  const data = workshops.length >= 4 ? workshops.slice(0, 4) : defaultWorkshops;
+
+  container.innerHTML = data.map(item => {
+    let imgSrc = item.Imagen_URL && item.Imagen_URL.trim() !== '' 
+      ? item.Imagen_URL 
+      : 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
+
+    return `
+      <div class="workshop-card">
+        <img src="${imgSrc}" onerror="this.onerror=null; this.src='https://via.placeholder.com/80/3499fe/ffffff?text=W';" alt="${item.Titulo || 'Workshop'}">
+        <h4>${item.Titulo || 'Workshop'}</h4>
+        <ul>
+          <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
+          <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
+          <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
+        </ul>
+        <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
+      </div>
+    `;
+  }).join('');
 }
 
 // CARGAR PRESENTACIONES (8 UNIDADES CON RANDOMIZACIÓN Y MODAL)
