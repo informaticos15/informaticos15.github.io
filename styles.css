@@ -71,7 +71,7 @@ marquee#marq a {
 
 /* NAVBAR CON ESTILOS INDIVIDUALES POR SECCIÓN */
 .navbar15 {
-  background: var(--azulM);
+  background: var(--azul);
   display: flex;
   align-items: center;
   justify-content: space-between;
