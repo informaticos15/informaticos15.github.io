@@ -81,38 +81,45 @@ async function loadArticles() {
   `).join('');
 }
 
+// FUNCIÓN PARA CARGAR EL ARTÍCULO DENTRO DE LA MISMA PÁGINA (SPA)
 function openArticle(docId) {
-  if (!docId) {
-    alert("Este artículo no tiene un ID de Google Doc configurado en el Sheet.");
+  if (!docId || docId.trim() === '') {
+    alert("Este artículo no tiene un ID de Google Doc configurado en la hoja de cálculo.");
     return;
+  }
+
+  // Limpiar el ID si el usuario pegó la URL completa por error en el Sheet
+  let cleanDocId = docId.trim();
+  if (cleanDocId.includes('/d/')) {
+    const match = cleanDocId.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) cleanDocId = match[1];
   }
 
   const homeSections = document.getElementById('homeSections');
   const articleViewer = document.getElementById('articleViewer');
   const articleContent = document.getElementById('articleContent');
 
-  // 1. Ocultar Home y mostrar visor
+  // 1. Ocultar la portada y mostrar el visor
   homeSections.style.display = 'none';
   articleViewer.style.display = 'block';
-  articleContent.innerHTML = '<p style="text-align: center; color: #666;">Cargando contenido del artículo...</p>';
+  articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido del artículo...</p>';
 
-  // 2. Renderizar el Google Doc mediante iframe embebido sin bordes de Google
-  const docUrl = `https://docs.google.com/document/d/${docId}/pub?embedded=true`;
-  
+  // 2. Construir la URL publicada de Google Docs
+  const docUrl = `https://docs.google.com/document/d/${cleanDocId}/pub?embedded=true`;
+
+  // 3. Renderizar dentro de tu sitio
   articleContent.innerHTML = `
-    <iframe src="${docUrl}" style="width: 100%; height: 800px; border: none; overflow: auto;"></iframe>
+    <iframe 
+      src="${docUrl}" 
+      style="width: 100%; height: 800px; border: none; background: white;"
+      onload="console.log('Artículo cargado con éxito');"
+      onerror="alert('Error al cargar el documento. Verifica que esté publicado en la web.');">
+    </iframe>
   `;
 
-  // Desplazar suavemente hacia arriba
+  // Desplazar la pantalla hacia arriba
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// BOTÓN PARA VOLVER A LA PÁGINA PRINCIPAL
-document.getElementById('btnBackToHome').addEventListener('click', () => {
-  document.getElementById('articleViewer').style.display = 'none';
-  document.getElementById('homeSections').style.display = 'block';
-  document.getElementById('articleContent').innerHTML = '';
-});
 
 // CONTROLES DEL CARRUSEL
 document.getElementById('nextSlide').addEventListener('click', () => {
