@@ -16,11 +16,12 @@ async function fetchSheetTab(sheetName) {
     const json = JSON.parse(jsonMatch[1]);
     const table = json.table;
     
-    // Extraer nombres de columnas exactamente como están en la primera fila
+    // Extraer nombres de columnas
     const cols = table.cols.map(c => (c && c.label) ? c.label.trim() : '');
 
     return table.rows.map(r => {
       let obj = {};
+      if (!r || !r.c) return obj;
       r.c.forEach((val, idx) => {
         let key = cols[idx] || `col_${idx}`;
         obj[key] = val ? (val.f !== undefined ? val.f : val.v) : '';
@@ -84,15 +85,11 @@ async function loadArticles() {
 // FUNCIÓN PARA CARGAR EL ARTÍCULO DENTRO DE LA MISMA PÁGINA (SPA)
 function openArticle(docId) {
   if (!docId || docId.trim() === '') {
-    alert("Este artículo no tiene un ID de Google Doc configurado en la hoja de cálculo.");
+    alert("Este artículo no tiene un enlace de Google Doc configurado.");
     return;
   }
 
   let cleanDocId = docId.trim();
-  if (cleanDocId.includes('/d/')) {
-    const match = cleanDocId.match(/\/d\/([a-zA-Z0-9-_]+)/);
-    if (match) cleanDocId = match[1];
-  }
 
   const homeSections = document.getElementById('homeSections');
   const articleViewer = document.getElementById('articleViewer');
@@ -102,7 +99,12 @@ function openArticle(docId) {
   articleViewer.style.display = 'block';
   articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido del artículo...</p>';
 
-  const docUrl = `https://docs.google.com/document/d/${cleanDocId}/pub?embedded=true`;
+  let docUrl = cleanDocId;
+  if (!cleanDocId.startsWith('http')) {
+    docUrl = `https://docs.google.com/document/d/${cleanDocId}/pub?embedded=true`;
+  } else if (!docUrl.includes('embedded=true')) {
+    docUrl += (docUrl.includes('?') ? '&' : '?') + 'embedded=true';
+  }
 
   articleContent.innerHTML = `
     <iframe 
@@ -142,7 +144,7 @@ document.getElementById('prevSlide').addEventListener('click', () => {
   slides[currentSlide].classList.add('active');
 });
 
-// CARGAR WORKSHOPS (4 EQUITATIVOS)
+// CARGAR WORKSHOPS
 async function loadWorkshops() {
   const workshops = await fetchSheetTab('Workshops');
   const container = document.getElementById('workshopsGrid');
@@ -176,56 +178,78 @@ async function loadWorkshops() {
   }).join('');
 }
 
-// NUEVA FUNCIÓN loadPresentaciones()
+// FUNCIÓN loadPresentaciones() ROBUTA A DESPLAZAMIENTO DE COLUMNAS
 async function loadPresentaciones() {
   const pptxList = await fetchSheetTab('Presentaciones');
   const container = document.getElementById('presentacionesGrid');
 
   if (!container) return;
 
-  // 1. Filtrar solo filas con Título válido
-  let validPresentations = pptxList.filter(item => item.Titulo && item.Titulo.trim() !== '');
+  // Normalización de claves y ajuste por filas incompletas
+  let items = pptxList.map(row => {
+    let normalized = {};
+    Object.keys(row).forEach(k => {
+      normalized[k.trim().toLowerCase()] = String(row[k] || '').trim();
+    });
 
-  if (validPresentations.length === 0) {
+    let titulo = normalized['titulo'] || normalized['col_1'] || '';
+    let slideUrl = normalized['slide_embed_url'] || normalized['col_3'] || '';
+    let thumbPath = normalized['thumbnail_path'] || normalized['col_4'] || '';
+
+    // Corregir desplazamiento de celda si Slide_Embed_URL no empieza por http
+    if (slideUrl && !slideUrl.startsWith('http')) {
+      if (!thumbPath) thumbPath = slideUrl;
+      slideUrl = '';
+    }
+
+    return {
+      Titulo: titulo,
+      Slide_Embed_URL: slideUrl,
+      Thumbnail_Path: thumbPath
+    };
+  }).filter(item => item.Titulo !== '');
+
+  if (items.length === 0) {
     container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #777;">No hay presentaciones disponibles.</p>';
     return;
   }
 
-  // 2. Mezclar aleatoriamente las presentaciones
-  for (let i = validPresentations.length - 1; i > 0; i--) {
+  // Mezcla aleatoria (Fisher-Yates)
+  for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [validPresentations[i], validPresentations[j]] = [validPresentations[j], validPresentations[i]];
+    [items[i], items[j]] = [items[j], items[i]];
   }
 
-  // 3. Tomar exactamente 8 presentaciones aleatorias
-  const selectedPresentations = validPresentations.slice(0, 8);
+  // Tomar hasta 8 elementos
+  const selected = items.slice(0, 8);
 
-  // 4. Renderizar las miniatura en el Grid
-  container.innerHTML = selectedPresentations.map((item, index) => {
-    const rawEmbedUrl = (item.Slide_Embed_URL || '').trim();
-    const rawThumbPath = (item.Thumbnail_Path || '').trim();
-    const title = item.Titulo.trim();
-
-    // Resolver la URL de la miniatura con fallback en caso de error
-    const thumbSrc = rawThumbPath !== '' ? rawThumbPath : `https://picsum.photos/300/200?random=${index}`;
+  container.innerHTML = selected.map((item, index) => {
+    const thumbSrc = item.Thumbnail_Path ? item.Thumbnail_Path : `https://picsum.photos/300/200?random=${index + 1}`;
 
     return `
-      <div class="pptx-thumb" data-embed-url="${rawEmbedUrl}" data-title="${title}">
-        <img src="${thumbSrc}" onerror="this.onerror=null; this.src='https://picsum.photos/300/200?random=${index}';" alt="${title}">
-        <div class="title-overlay">${title}</div>
+      <div class="pptx-thumb" data-url="${item.Slide_Embed_URL}" data-title="${item.Titulo}">
+        <img src="${thumbSrc}" onerror="this.onerror=null; this.src='https://picsum.photos/300/200?random=${index + 1}';" alt="${item.Titulo}">
+        <div class="title-overlay">${item.Titulo}</div>
       </div>
     `;
   }).join('');
 
-  // 5. Asignar el evento click para abrir el modal
+  // Evento click en miniatura
   container.querySelectorAll('.pptx-thumb').forEach(thumb => {
     thumb.addEventListener('click', function() {
-      const embedUrl = this.getAttribute('data-embed-url');
+      let url = this.getAttribute('data-url');
       const title = this.getAttribute('data-title');
 
-      if (!embedUrl) {
-        alert("Esta presentación no tiene una URL configurada en la hoja de cálculo.");
+      if (!url || url === 'undefined' || url.trim() === '') {
+        alert("Esta presentación no tiene un enlace de Google Slides configurado en la hoja de cálculo.");
         return;
+      }
+
+      // Convertir URLs normales de edit/pub a /embed para reproducir dentro del modal iframe
+      if (url.includes('/edit')) {
+        url = url.split('/edit')[0] + '/embed';
+      } else if (url.includes('/pub') && !url.includes('/embed')) {
+        url = url.replace('/pub', '/embed');
       }
 
       const modal = document.getElementById('pptxModal');
@@ -234,7 +258,7 @@ async function loadPresentaciones() {
 
       if (modal && modalIframe && modalTitle) {
         modalTitle.textContent = title;
-        modalIframe.src = embedUrl;
+        modalIframe.src = url;
         modal.classList.add('active');
       }
     });
