@@ -88,7 +88,6 @@ function openArticle(docId) {
     return;
   }
 
-  // Limpiar el ID si el usuario pegó la URL completa por error en el Sheet
   let cleanDocId = docId.trim();
   if (cleanDocId.includes('/d/')) {
     const match = cleanDocId.match(/\/d\/([a-zA-Z0-9-_]+)/);
@@ -99,26 +98,31 @@ function openArticle(docId) {
   const articleViewer = document.getElementById('articleViewer');
   const articleContent = document.getElementById('articleContent');
 
-  // 1. Ocultar la portada y mostrar el visor
   homeSections.style.display = 'none';
   articleViewer.style.display = 'block';
   articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido del artículo...</p>';
 
-  // 2. Construir la URL publicada de Google Docs
   const docUrl = `https://docs.google.com/document/d/${cleanDocId}/pub?embedded=true`;
 
-  // 3. Renderizar dentro de tu sitio
   articleContent.innerHTML = `
     <iframe 
       src="${docUrl}" 
       style="width: 100%; height: 800px; border: none; background: white;"
-      onload="console.log('Artículo cargado con éxito');"
-      onerror="alert('Error al cargar el documento. Verifica que esté publicado en la web.');">
+      onload="console.log('Artículo cargado con éxito');">
     </iframe>
   `;
 
-  // Desplazar la pantalla hacia arriba
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// BOTÓN PARA VOLVER A LA HOMEPAGE
+const btnBack = document.getElementById('btnBackToHome');
+if (btnBack) {
+  btnBack.addEventListener('click', () => {
+    document.getElementById('articleViewer').style.display = 'none';
+    document.getElementById('homeSections').style.display = 'block';
+    document.getElementById('articleContent').innerHTML = '';
+  });
 }
 
 // CONTROLES DEL CARRUSEL
@@ -144,26 +148,34 @@ async function loadWorkshops() {
   const container = document.getElementById('workshopsGrid');
 
   const defaultWorkshops = [
-    { Titulo: 'Rey de Redes', Imagen_URL: 'img/taller_redes.png', Modulo_1: 'Protocolos', Modulo_2: 'Dispositivos', Modulo_3: 'Topologías' },
-    { Titulo: 'Google Sheets', Imagen_URL: 'img/google_sheets.png', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Gráficos' },
-    { Titulo: 'Web Dev', Imagen_URL: 'img/web_dev.png', Modulo_1: 'HTML5', Modulo_2: 'CSS3', Modulo_3: 'JavaScript' },
-    { Titulo: 'Automatización', Imagen_URL: 'img/automatizacion.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
+    { Titulo: 'Rey de Redes', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Protocolos', Modulo_2: 'Dispositivos', Modulo_3: 'Topologias' },
+    { Titulo: 'Google Sheets', Imagen_URL: 'img/google_sheets.png', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Graficos' },
+    { Titulo: 'Web Dev', Imagen_URL: 'img/web_dev.png', Modulo_1: 'HTML', Modulo_2: 'CSS', Modulo_3: 'JavaScript' },
+    { Titulo: 'Automatizacion', Imagen_URL: './img/automatizacion.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
   ];
 
   const data = workshops.length >= 4 ? workshops.slice(0, 4) : defaultWorkshops;
 
-  container.innerHTML = data.map(item => `
-    <div class="workshop-card">
-      <img src="${item.Imagen_URL || 'https://via.placeholder.com/80/3499fe/ffffff?text=W'}" alt="${item.Titulo || 'Workshop'}">
-      <h4>${item.Titulo || 'Workshop'}</h4>
-      <ul>
-        <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
-        <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
-        <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
-      </ul>
-      <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
-    </div>
-  `).join('');
+  container.innerHTML = data.map(item => {
+    // Si la imagen es Base64 muy larga o no existe, colocar respaldo
+    let imgSrc = item.Imagen_URL || 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
+    if (imgSrc.length > 500) {
+      imgSrc = 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
+    }
+
+    return `
+      <div class="workshop-card">
+        <img src="${imgSrc}" alt="${item.Titulo || 'Workshop'}">
+        <h4>${item.Titulo || 'Workshop'}</h4>
+        <ul>
+          <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
+          <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
+          <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
+        </ul>
+        <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
+      </div>
+    `;
+  }).join('');
 }
 
 // CARGAR PRESENTACIONES (8 UNIDADES CON RANDOMIZACIÓN Y MODAL)
@@ -171,42 +183,58 @@ async function loadPresentaciones() {
   const pptxList = await fetchSheetTab('Presentaciones');
   const container = document.getElementById('presentacionesGrid');
 
-  const defaultData = [
-    { Titulo: 'Datos No Agrupados', Slide_Embed_ID: '2PACX-1vRndRh69UxkKMdnXo-8NJuSvBFVhPO-vALoLAyaacHHZVURx8OxoYz-jZB30PoLCX65PiN6oJyoqfo3', Thumbnail_Path: 'img/pptx/datos_no_agrupados.png' },
-    { Titulo: 'Electrónica Digital', Slide_Embed_ID: '2PACX-1vRCdEw85JiDkLsdGDjVVrpFDcH6LuojqAz1mFoUstDeq6tGMqHmp-FPmtmEsxrKz2eDYLChZzOK40h2', Thumbnail_Path: 'img/pptx/electronica_digital.png' },
-    { Titulo: 'Estructura de Datos 2', Slide_Embed_ID: '2PACX-1vTvtZBStPW16UbZ9pm_eiW4ClMdjDyuINHmPNSrfpEHMUQeFfozknVf_f0HMbaPiHwxsTBayHZFo2NU', Thumbnail_Path: 'img/pptx/estructura_datos_2.png' },
-    { Titulo: 'Didáctica Informática', Slide_Embed_ID: '2PACX-1vSrG0GkskW6HR6z9hgkoQmq61UE_K81Stogr5Gwished9Sdox20PcrAhxSQOUgkB8bgsG6ZE4puXZ01', Thumbnail_Path: 'img/pptx/didactica.png' }
-  ];
+  let data = pptxList.length > 0 ? pptxList : [];
 
-  let data = pptxList.length > 0 ? pptxList : defaultData;
-  
-  // Mezclar aleatoriamente y seleccionar exactamente 8
+  // Filtrar solo las filas que tengan un título asignado
+  data = data.filter(item => item.Titulo && item.Titulo.trim() !== '');
+
+  // Mezclar aleatoriamente y seleccionar 8
   data = data.sort(() => Math.random() - 0.5).slice(0, 8);
 
   container.innerHTML = data.map((item, i) => {
-    // Si en el Sheet pones la URL completa o solo el ID de Google Slides:
-    let embedUrl = item.Slide_Embed_ID || '';
-    if (embedUrl && !embedUrl.startsWith('http')) {
-      embedUrl = `https://docs.google.com/presentation/d/e/${embedUrl}/embed?start=false&loop=false&delayms=3000`;
+    // Buscar la URL del embed de Google Slides
+    let rawUrl = item.Slide_Embed_URL || item.Slide_Embed_ID || '';
+    let embedUrl = '';
+
+    if (rawUrl.startsWith('http')) {
+      // Si pegaste la URL edit/pub de Google Slides
+      if (rawUrl.includes('/edit')) {
+        embedUrl = rawUrl.replace('/edit', '/embed');
+      } else if (rawUrl.includes('/pub')) {
+        embedUrl = rawUrl.replace('/pub', '/embed');
+      } else {
+        embedUrl = rawUrl;
+      }
+    } else if (rawUrl.trim() !== '') {
+      // Si solo es el ID corto
+      embedUrl = `https://docs.google.com/presentation/d/e/${rawUrl}/embed?start=false&loop=false&delayms=3000`;
+    }
+
+    // Determinar la miniatura
+    let thumbSrc = item.Slide_Embed_URL || item.Thumbnail_Path || '';
+    if (!thumbSrc || !thumbSrc.includes('.')) {
+      thumbSrc = `https://picsum.photos/300/200?random=${i + 10}`;
     }
 
     return `
       <div class="pptx-thumb" data-url="${embedUrl}" data-title="${item.Titulo || 'Presentación'}">
-        <img src="${item.Thumbnail_Path || 'https://picsum.photos/300/200?random=' + (i+10)}" alt="${item.Titulo || 'Presentación'}">
+        <img src="${thumbSrc}" alt="${item.Titulo || 'Presentación'}">
         <div class="title-overlay">${item.Titulo || 'Presentación'}</div>
       </div>
     `;
   }).join('');
 
-  // VINCULAR EVENTO DE CLIC PARA ABRIR EN EL MODAL
+  // VINCULAR EVENTO DE CLIC PARA ABRIR EL MODAL
   document.querySelectorAll('.pptx-thumb').forEach(thumb => {
     thumb.addEventListener('click', function() {
       const url = this.getAttribute('data-url');
       const title = this.getAttribute('data-title');
-      if (url) {
+      if (url && url.trim() !== '') {
         document.getElementById('modalIframe').src = url;
         document.getElementById('modalTitle').textContent = title;
         document.getElementById('pptxModal').classList.add('active');
+      } else {
+        alert("Esta presentación no tiene un enlace de Google Slides configurado en el Sheet.");
       }
     });
   });
