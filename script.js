@@ -149,23 +149,21 @@ async function loadWorkshops() {
 
   const defaultWorkshops = [
     { Titulo: 'Rey de Redes', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Protocolos', Modulo_2: 'Dispositivos', Modulo_3: 'Topologias' },
-    { Titulo: 'Google Sheets', Imagen_URL: 'img/google_sheets.png', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Graficos' },
-    { Titulo: 'Web Dev', Imagen_URL: 'img/web_dev.png', Modulo_1: 'HTML', Modulo_2: 'CSS', Modulo_3: 'JavaScript' },
-    { Titulo: 'Automatizacion', Imagen_URL: './img/automatizacion.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
+    { Titulo: 'Google Sheets', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Graficos' },
+    { Titulo: 'Web Dev', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'HTML', Modulo_2: 'CSS', Modulo_3: 'JavaScript' },
+    { Titulo: 'Automatización', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
   ];
 
   const data = workshops.length >= 4 ? workshops.slice(0, 4) : defaultWorkshops;
 
   container.innerHTML = data.map(item => {
-    // Si la imagen es Base64 muy larga o no existe, colocar respaldo
-    let imgSrc = item.Imagen_URL || 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
-    if (imgSrc.length > 500) {
-      imgSrc = 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
-    }
+    let imgSrc = item.Imagen_URL && item.Imagen_URL.trim() !== '' 
+      ? item.Imagen_URL 
+      : 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
 
     return `
       <div class="workshop-card">
-        <img src="${imgSrc}" alt="${item.Titulo || 'Workshop'}">
+        <img src="${imgSrc}" onerror="this.onerror=null; this.src='https://via.placeholder.com/80/3499fe/ffffff?text=W';" alt="${item.Titulo || 'Workshop'}">
         <h4>${item.Titulo || 'Workshop'}</h4>
         <ul>
           <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
@@ -185,19 +183,18 @@ async function loadPresentaciones() {
 
   let data = pptxList.length > 0 ? pptxList : [];
 
-  // Filtrar solo las filas que tengan un título asignado
+  // Filtrar solo las filas que tengan un Título asignado
   data = data.filter(item => item.Titulo && item.Titulo.trim() !== '');
 
   // Mezclar aleatoriamente y seleccionar 8
   data = data.sort(() => Math.random() - 0.5).slice(0, 8);
 
   container.innerHTML = data.map((item, i) => {
-    // Buscar la URL del embed de Google Slides
-    let rawUrl = item.Slide_Embed_URL || item.Slide_Embed_ID || '';
+    // 1. Obtener la URL de Google Slides para el modal
+    let rawUrl = item.Slide_Embed_URL || '';
     let embedUrl = '';
 
     if (rawUrl.startsWith('http')) {
-      // Si pegaste la URL edit/pub de Google Slides
       if (rawUrl.includes('/edit')) {
         embedUrl = rawUrl.replace('/edit', '/embed');
       } else if (rawUrl.includes('/pub')) {
@@ -206,19 +203,17 @@ async function loadPresentaciones() {
         embedUrl = rawUrl;
       }
     } else if (rawUrl.trim() !== '') {
-      // Si solo es el ID corto
       embedUrl = `https://docs.google.com/presentation/d/e/${rawUrl}/embed?start=false&loop=false&delayms=3000`;
     }
 
-    // Determinar la miniatura
-    let thumbSrc = item.Slide_Embed_URL || item.Thumbnail_Path || '';
-    if (!thumbSrc || !thumbSrc.includes('.')) {
-      thumbSrc = `https://picsum.photos/300/200?random=${i + 10}`;
-    }
+    // 2. Obtener la miniatura ÚNICAMENTE desde Thumbnail_Path
+    let thumbSrc = item.Thumbnail_Path && item.Thumbnail_Path.trim() !== '' 
+      ? item.Thumbnail_Path 
+      : `https://picsum.photos/300/200?random=${i + 10}`;
 
     return `
       <div class="pptx-thumb" data-url="${embedUrl}" data-title="${item.Titulo || 'Presentación'}">
-        <img src="${thumbSrc}" alt="${item.Titulo || 'Presentación'}">
+        <img src="${thumbSrc}" onerror="this.onerror=null; this.src='https://picsum.photos/300/200?random=${i + 10}';" alt="${item.Titulo || 'Presentación'}">
         <div class="title-overlay">${item.Titulo || 'Presentación'}</div>
       </div>
     `;
