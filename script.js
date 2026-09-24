@@ -111,7 +111,7 @@ async function loadWorkshops() {
 
   container.innerHTML = data.map(item => `
     <div class="workshop-card">
-      <img src="item.Imagen_URL" alt="${item.Titulo}">
+      <img src="${item.Imagen_URL}" alt="${item.Titulo}">
       <h4>${item.Titulo}</h4>
       <ul>
         <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
