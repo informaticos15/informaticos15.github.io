@@ -1,23 +1,22 @@
 {
   "short_name": "i15",
-  "name": "Informaticos15",
+  "name": "Informaticos 15 - Educación Informática",
   "icons": [
     {
       "src": "img/i15.png",
-      "type": "image/webp",
-      "sizes": "512x512"
+      "type": "image/png",
+      "sizes": "192x192"
     },
     {
       "src": "img/i15.png",
-      "type": "image/x-icon",
-      "sizes": "192x192"
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "https://etromulogallegos.info.ve/informaticos15",
-  "background_color": "#fff",
+  "start_url": "/index.html",
+  "background_color": "#ffffff",
+  "theme_color": "#3d47d9",
   "display": "standalone",
-  "scope": "/maps/",
-  "theme_color": "#6248cc",
-  "orientation": "landscape"
-
+  "orientation": "portrait-primary",
+  "scope": "/"
 }
