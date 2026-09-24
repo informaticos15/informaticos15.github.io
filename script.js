@@ -82,10 +82,16 @@ async function loadArticles() {
 }
 
 // FUNCIÓN PARA CARGAR EL ARTÍCULO DENTRO DE LA MISMA PÁGINA (SPA)
-function openArticle(docUrl) {
-  if (!docUrl || docUrl.trim() === '') {
-    alert("Este artículo no tiene una URL de Google Doc configurada.");
+function openArticle(docId) {
+  if (!docId || docId.trim() === '') {
+    alert("Este artículo no tiene un ID de Google Doc configurado en la hoja de cálculo.");
     return;
+  }
+
+  let cleanDocId = docId.trim();
+  if (cleanDocId.includes('/d/')) {
+    const match = cleanDocId.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) cleanDocId = match[1];
   }
 
   const homeSections = document.getElementById('homeSections');
@@ -94,18 +100,15 @@ function openArticle(docUrl) {
 
   homeSections.style.display = 'none';
   articleViewer.style.display = 'block';
-  articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido...</p>';
+  articleContent.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Cargando contenido del artículo...</p>';
 
-  // Asegurar parámetro embedded
-  let finalUrl = docUrl.trim();
-  if (!finalUrl.includes('embedded=true')) {
-    finalUrl += (finalUrl.includes('?') ? '&' : '?') + 'embedded=true';
-  }
+  const docUrl = `https://docs.google.com/document/d/${cleanDocId}/pub?embedded=true`;
 
   articleContent.innerHTML = `
     <iframe 
-      src="${finalUrl}" 
-      style="width: 100%; height: 800px; border: none; background: white;">
+      src="${docUrl}" 
+      style="width: 100%; height: 800px; border: none; background: white;"
+      onload="console.log('Artículo cargado con éxito');">
     </iframe>
   `;
 
@@ -173,60 +176,66 @@ async function loadWorkshops() {
   }).join('');
 }
 
-// CARGAR PRESENTACIONES (8 UNIDADES CON RANDOMIZACIÓN Y MODAL)
+// NUEVA FUNCIÓN loadPresentaciones()
 async function loadPresentaciones() {
   const pptxList = await fetchSheetTab('Presentaciones');
   const container = document.getElementById('presentacionesGrid');
 
-  let data = pptxList.length > 0 ? pptxList : [];
+  if (!container) return;
 
-  // Filtrar solo las filas que tengan un Título asignado
-  data = data.filter(item => item.Titulo && item.Titulo.trim() !== '');
+  // 1. Filtrar solo filas con Título válido
+  let validPresentations = pptxList.filter(item => item.Titulo && item.Titulo.trim() !== '');
 
-  // Mezclar aleatoriamente y seleccionar 8
-  data = data.sort(() => Math.random() - 0.5).slice(0, 8);
+  if (validPresentations.length === 0) {
+    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #777;">No hay presentaciones disponibles.</p>';
+    return;
+  }
 
-  container.innerHTML = data.map((item, i) => {
-    // 1. Obtener la URL de Google Slides para el modal
-    let rawUrl = item.Slide_Embed_URL || '';
-    let embedUrl = '';
+  // 2. Mezclar aleatoriamente las presentaciones
+  for (let i = validPresentations.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [validPresentations[i], validPresentations[j]] = [validPresentations[j], validPresentations[i]];
+  }
 
-    if (rawUrl.startsWith('http')) {
-      if (rawUrl.includes('/edit')) {
-        embedUrl = rawUrl.replace('/edit', '/embed');
-      } else if (rawUrl.includes('/pub')) {
-        embedUrl = rawUrl.replace('/pub', '/embed');
-      } else {
-        embedUrl = rawUrl;
-      }
-    } else if (rawUrl.trim() !== '') {
-      embedUrl = `https://docs.google.com/presentation/d/e/${rawUrl}/embed?start=false&loop=false&delayms=3000`;
-    }
+  // 3. Tomar exactamente 8 presentaciones aleatorias
+  const selectedPresentations = validPresentations.slice(0, 8);
 
-    // 2. Obtener la miniatura ÚNICAMENTE desde Thumbnail_Path
-    let thumbSrc = item.Thumbnail_Path && item.Thumbnail_Path.trim() !== '' 
-      ? item.Thumbnail_Path 
-      : `https://picsum.photos/300/200?random=${i + 10}`;
+  // 4. Renderizar las miniatura en el Grid
+  container.innerHTML = selectedPresentations.map((item, index) => {
+    const rawEmbedUrl = (item.Slide_Embed_URL || '').trim();
+    const rawThumbPath = (item.Thumbnail_Path || '').trim();
+    const title = item.Titulo.trim();
+
+    // Resolver la URL de la miniatura con fallback en caso de error
+    const thumbSrc = rawThumbPath !== '' ? rawThumbPath : `https://picsum.photos/300/200?random=${index}`;
 
     return `
-      <div class="pptx-thumb" data-url="${embedUrl}" data-title="${item.Titulo || 'Presentación'}">
-        <img src="${thumbSrc}" onerror="this.onerror=null; this.src='https://picsum.photos/300/200?random=${i + 10}';" alt="${item.Titulo || 'Presentación'}">
-        <div class="title-overlay">${item.Titulo || 'Presentación'}</div>
+      <div class="pptx-thumb" data-embed-url="${rawEmbedUrl}" data-title="${title}">
+        <img src="${thumbSrc}" onerror="this.onerror=null; this.src='https://picsum.photos/300/200?random=${index}';" alt="${title}">
+        <div class="title-overlay">${title}</div>
       </div>
     `;
   }).join('');
 
-  // VINCULAR EVENTO DE CLIC PARA ABRIR EL MODAL
-  document.querySelectorAll('.pptx-thumb').forEach(thumb => {
+  // 5. Asignar el evento click para abrir el modal
+  container.querySelectorAll('.pptx-thumb').forEach(thumb => {
     thumb.addEventListener('click', function() {
-      const url = this.getAttribute('data-url');
+      const embedUrl = this.getAttribute('data-embed-url');
       const title = this.getAttribute('data-title');
-      if (url && url.trim() !== '') {
-        document.getElementById('modalIframe').src = url;
-        document.getElementById('modalTitle').textContent = title;
-        document.getElementById('pptxModal').classList.add('active');
-      } else {
-        alert("Esta presentación no tiene un enlace de Google Slides configurado en el Sheet.");
+
+      if (!embedUrl) {
+        alert("Esta presentación no tiene una URL configurada en la hoja de cálculo.");
+        return;
+      }
+
+      const modal = document.getElementById('pptxModal');
+      const modalIframe = document.getElementById('modalIframe');
+      const modalTitle = document.getElementById('modalTitle');
+
+      if (modal && modalIframe && modalTitle) {
+        modalTitle.textContent = title;
+        modalIframe.src = embedUrl;
+        modal.classList.add('active');
       }
     });
   });
