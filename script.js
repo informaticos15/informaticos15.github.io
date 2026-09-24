@@ -1,5 +1,5 @@
 // URL base de tu Google Sheet (ID normal del editor)
-const SPREADSHEET_ID = '';
+const SPREADSHEET_ID = '1dHUk2XI6hkfz0yESTpG6x1tVjXgrOWLoOqMUzrmSVwQ';
 
 async function fetchSheetTab(sheetName) {
   const gvizUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
