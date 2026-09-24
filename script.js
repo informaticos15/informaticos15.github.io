@@ -1,34 +1,36 @@
 // URL base de tu Google Sheet publicado en la web
-const SPREADSHEET_PUB_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-eRTNJZ0pF-U7ZVzv7-Kq2QbQQVLd3jPepl1B7kxYPovsIUE6TohtfAWPbO4etMOCE7B-FOI7NET2/pubhtml';
+// Usa el ID real del documento de Google Sheets (el ID normal del editor)
+const SPREADSHEET_ID = '1dHUk2XI6hkfz0yESTpG6x1tVjXgrOWLoOqMUzrmSVwQ';
 
-//'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-eRTNJZ0pF-U7ZVzv7-Kq2QbQQVLd3jPepl1B7kxYPovsIUE6TohtfAWPbO4etMOCE7B-FOI7NET2/pubhtml'//
-
-// Función para consultar pestañas vía la API pública GViz
 async function fetchSheetTab(sheetName) {
-  const idMatch = SPREADSHEET_PUB_URL.match(/\/d\/e\/([^\/]+)/);
-  if (!idMatch) return [];
-  const pubId = idMatch[1];
-  const gvizUrl = `https://docs.google.com/spreadsheets/d/e/${pubId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  const gvizUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
 
   try {
     const res = await fetch(gvizUrl);
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const text = await res.text();
+    
+    // Extraer el JSON del wrapper de google.visualization.Query.setResponse
     const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);/);
     if (!jsonMatch) return [];
+    
     const json = JSON.parse(jsonMatch[1]);
-    const rows = json.table.rows;
-    const cols = json.table.cols.map(c => c ? c.label : '');
+    const table = json.table;
+    
+    // Extraer nombres de columnas (de la fila de encabezados o etiquetas)
+    const cols = table.cols.map(c => (c && c.label) ? c.label.trim() : '');
 
-    return rows.map(r => {
+    return table.rows.map(r => {
       let obj = {};
       r.c.forEach((val, idx) => {
         let key = cols[idx] || `col_${idx}`;
-        obj[key] = val ? val.v : '';
+        // Extraer el valor formateado (f) o el valor nativo (v)
+        obj[key] = val ? (val.f !== undefined ? val.f : val.v) : '';
       });
       return obj;
     });
   } catch (err) {
-    console.error("Error leyendo pestaña " + sheetName, err);
+    console.error("Error leyendo la pestaña " + sheetName + ":", err);
     return [];
   }
 }
