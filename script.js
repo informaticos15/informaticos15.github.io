@@ -39,6 +39,16 @@ document.getElementById('toggleSidebarBtn').addEventListener('click', () => {
   document.getElementById('sidebar').classList.toggle('hidden');
 });
 
+// TOGGLE NAVBAR EN MÓVIL
+const toggleBtn = document.getElementById('toggleSidebarBtn');
+const navMenu = document.querySelector('.nav45');
+
+if (toggleBtn && navMenu) {
+  toggleBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+}
+
 // CARGAR ARTÍCULOS (CARRUSEL + GRID DE 6 CAJAS)
 let currentSlide = 0;
 let slidesCount = 0;
