@@ -114,29 +114,38 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="main-content">
-
-      <!-- CARRUSEL DESTACADO -->
-      <section class="carousel-section">
-        <button class="carousel-arrow prev" id="prevSlide">&lt;</button>
-        <button class="carousel-arrow next" id="nextSlide">&gt;</button>
-        <div id="carouselContainer"></div>
-      </section>
-
-      <!-- ARTÍCULOS RECIENTES (GRID 6 CAJAS) -->
-      <h3 class="section-title">Artículos Recientes</h3>
-      <section class="articles-grid" id="articlesGrid"></section>
-
-      <!-- WORKSHOPS (LAYOUT EQUITATIVO: 4 EN 1 FILA O 2X2) -->
-      <h3 class="section-title">Workshops Prácticos</h3>
-      <section class="workshops-grid" id="workshopsGrid"></section>
-
-      <!-- PRESENTACIONES EDUCATIVAS (GRID DE 8 DIAPOSITIVAS) -->
-      <h3 class="section-title">Presentaciones Educativas</h3>
-      <section class="presentaciones-grid" id="presentacionesGrid"></section>
-
-    </main>
+        <!-- CONTENEDOR PARA VER EL ARTÍCULO COMPLETO (SPA) -->
+        <article id="articleViewer" style="display: none; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <button id="btnBackToHome" class="btn-read" style="margin-bottom: 20px; background: var(--azulM); cursor: pointer;">
+            &larr; Volver a las novedades
+          </button>
+          <div id="articleContent">Cargando artículo...</div>
+        </article>
+      
+        <!-- CONTENIDO DE LA PÁGINA PRINCIPAL -->
+        <div id="homeSections">
+          <!-- CARRUSEL DESTACADO -->
+          <section class="carousel-section">
+            <button class="carousel-arrow prev" id="prevSlide">&lt;</button>
+            <button class="carousel-arrow next" id="nextSlide">&gt;</button>
+            <div id="carouselContainer"></div>
+          </section>
+      
+          <!-- ARTÍCULOS RECIENTES -->
+          <h3 class="section-title">Artículos Recientes</h3>
+          <section class="articles-grid" id="articlesGrid"></section>
+      
+          <!-- WORKSHOPS -->
+          <h3 class="section-title">Workshops Prácticos</h3>
+          <section class="workshops-grid" id="workshopsGrid"></section>
+      
+          <!-- PRESENTACIONES EDUCATIVAS -->
+          <h3 class="section-title">Presentaciones Educativas</h3>
+          <section class="presentaciones-grid" id="presentacionesGrid"></section>
+        </div>
+      
+      </main>
   </div>
 
   <!-- MODAL PARA PRESENTACIONES -->
