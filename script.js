@@ -153,25 +153,25 @@ async function loadWorkshops() {
 
   const data = workshops.length >= 4 ? workshops.slice(0, 4) : defaultWorkshops;
 
- // container.innerHTML = data.map(item => {
-    //let imgSrc = item.Imagen_URL && item.Imagen_URL.trim() !== '' 
-    //  ? item.Imagen_URL 
-   //   : 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
+  container.innerHTML = data.map(item => {
+    let imgSrc = item.Imagen_URL && item.Imagen_URL.trim() !== '' 
+      ? item.Imagen_URL 
+     : 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
 
-  //  return `
-     // <div class="workshop-card">
-     //   <img src="${imgSrc}" onerror="this.onerror=null; this.src='https://via.placeholder.com/80/3499fe/ffffff?text=W';" alt="${item.Titulo || 'Workshop'}">
-     //   <h4>${item.Titulo || 'Workshop'}</h4>
-     //   <ul>
-     //     <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
-     //     <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
-     //     <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
-    //    </ul>
-    //    <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
-   //   </div>
-   // `;
-//  }).join('');
-//}//
+    return `
+      <div class="workshop-card">
+        <img src="${imgSrc}" onerror="this.onerror=null; this.src='https://via.placeholder.com/80/3499fe/ffffff?text=W';" alt="${item.Titulo || 'Workshop'}">
+        <h4>${item.Titulo || 'Workshop'}</h4>
+        <ul>
+         <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
+          <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
+         <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
+        </ul>
+        <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
+     </div>
+    `;
+ }).join('');
+}
 
 // CARGAR PRESENTACIONES (8 UNIDADES CON RANDOMIZACIÓN Y MODAL)
 async function loadPresentaciones() {
