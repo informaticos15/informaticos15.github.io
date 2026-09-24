@@ -1,5 +1,4 @@
-// URL base de tu Google Sheet publicado en la web
-// Usa el ID real del documento de Google Sheets (el ID normal del editor)
+// URL base de tu Google Sheet (ID normal del editor)
 const SPREADSHEET_ID = '1dHUk2XI6hkfz0yESTpG6x1tVjXgrOWLoOqMUzrmSVwQ';
 
 async function fetchSheetTab(sheetName) {
@@ -17,14 +16,13 @@ async function fetchSheetTab(sheetName) {
     const json = JSON.parse(jsonMatch[1]);
     const table = json.table;
     
-    // Extraer nombres de columnas (de la fila de encabezados o etiquetas)
+    // Extraer nombres de columnas exactamente como están en la primera fila
     const cols = table.cols.map(c => (c && c.label) ? c.label.trim() : '');
 
     return table.rows.map(r => {
       let obj = {};
       r.c.forEach((val, idx) => {
         let key = cols[idx] || `col_${idx}`;
-        // Extraer el valor formateado (f) o el valor nativo (v)
         obj[key] = val ? (val.f !== undefined ? val.f : val.v) : '';
       });
       return obj;
@@ -49,11 +47,11 @@ async function loadArticles() {
   const carouselContainer = document.getElementById('carouselContainer');
   const gridContainer = document.getElementById('articlesGrid');
 
-  // Datos por defecto de respaldo
+  // Datos por defecto si el sheet está vacío
   const data = articles.length > 0 ? articles : [
     { Titulo: 'Conexión a Internet y Redes', Resumen: 'Aprende sobre capas, protocolos TCP/IP y cómo viajan los datos.', Banner_URL: './p/TCP.png' },
     { Titulo: 'Evolución del Concepto de Límite', Resumen: 'Un recorrido histórico desde Arquímedes hasta Cauchy y Weierstrass.', Banner_URL: './p/evolucion_concepto_limite.png' },
-    { Titulo: 'Introducción a DevOps', Resumen: 'Metodología colaborativa entre desarrollo y operaciones de software.', Banner_URL: './images/DevOps.png' }
+    { Titulo: 'Introducción a DevOps', Resumen: 'Metodología colaborativa entre desarrollo y operaciones de software.', Banner_URL: './p/DevOps.png' }
   ];
 
   // CARRUSEL (PRIMEROS 3)
@@ -71,7 +69,7 @@ async function loadArticles() {
   const gridItems = data.slice(0, 6);
   gridContainer.innerHTML = gridItems.map(item => `
     <article class="article-card">
-      <img src="${item.Banner_URL || 'https://picsum.photos/300/150'}" alt="${item.Titulo}">
+      <img src="${item.Banner_URL || 'https://picsum.photos/300/150'}" alt="${item.Titulo || 'Artículo'}">
       <div class="article-card-body">
         <h4>${item.Titulo || 'Artículo sin título'}</h4>
         <p>${item.Resumen ? item.Resumen.substring(0, 80) + '...' : ''}</p>
@@ -102,23 +100,25 @@ async function loadWorkshops() {
   const workshops = await fetchSheetTab('Workshops');
   const container = document.getElementById('workshopsGrid');
 
-  const data = workshops.length >= 4 ? workshops.slice(0, 4) : [
-    { Titulo: 'Rey de Redes', Modulo_1: 'Protocolos', Modulo_2: 'Dispositivos', Modulo_3: 'Topologías' },
-    { Titulo: 'Google Sheets', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Gráficos' },
-    { Titulo: 'Web Dev', Modulo_1: 'HTML5', Modulo_2: 'CSS3', Modulo_3: 'JavaScript' },
-    { Titulo: 'Automatización', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
+  const defaultWorkshops = [
+    { Titulo: 'Rey de Redes', Imagen_URL: 'img/taller_redes.png', Modulo_1: 'Protocolos', Modulo_2: 'Dispositivos', Modulo_3: 'Topologías' },
+    { Titulo: 'Google Sheets', Imagen_URL: 'img/google_sheets.png', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Gráficos' },
+    { Titulo: 'Web Dev', Imagen_URL: 'img/web_dev.png', Modulo_1: 'HTML5', Modulo_2: 'CSS3', Modulo_3: 'JavaScript' },
+    { Titulo: 'Automatización', Imagen_URL: 'img/automatizacion.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
   ];
+
+  const data = workshops.length >= 4 ? workshops.slice(0, 4) : defaultWorkshops;
 
   container.innerHTML = data.map(item => `
     <div class="workshop-card">
-      <img src="${item.Imagen_URL}" alt="${item.Titulo}">
-      <h4>${item.Titulo}</h4>
+      <img src="${item.Imagen_URL || 'https://via.placeholder.com/80/3499fe/ffffff?text=W'}" alt="${item.Titulo || 'Workshop'}">
+      <h4>${item.Titulo || 'Workshop'}</h4>
       <ul>
         <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
         <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
         <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
       </ul>
-      <a href="#" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
+      <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
     </div>
   `).join('');
 }
@@ -129,14 +129,10 @@ async function loadPresentaciones() {
   const container = document.getElementById('presentacionesGrid');
 
   const defaultData = [
-    { Titulo: 'Datos No Agrupados', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vRndRh69UxkKMdnXo-8NJuSvBFVhPO-vALoLAyaacHHZVURx8OxoYz-jZB30PoLCX65PiN6oJyoqfo3/embed' },
-    { Titulo: 'Electrónica Digital', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vRCdEw85JiDkLsdGDjVVrpFDcH6LuojqAz1mFoUstDeq6tGMqHmp-FPmtmEsxrKz2eDYLChZzOK40h2/embed' },
-    { Titulo: 'Estructura de Datos 2', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vTvtZBStPW16UbZ9pm_eiW4ClMdjDyuINHmPNSrfpEHMUQeFfozknVf_f0HMbaPiHwxsTBayHZFo2NU/embed' },
-    { Titulo: 'Didáctica Informática', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vSrG0GkskW6HR6z9hgkoQmq61UE_K81Stogr5Gwished9Sdox20PcrAhxSQOUgkB8bgsG6ZE4puXZ01/embed' },
-    { Titulo: 'Álgebra Lineal', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vQigbVB0nQvCYmtF98IFbdtMBvPW_dXVKOyUSL5JSm-BHBV3_aWVDAFfFJnZ97N7OfPAztX8bDoa8gS/embed' },
-    { Titulo: 'Redes Informáticas', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vRAlK7AeyzoJK5lwLl1hWMmMEC8I5UNCqmYKEP9qVR7ouxsbCdX6b8-OxDop1m6mhO19qD3isMGcLxA/embed' },
-    { Titulo: 'Seguridad Informática', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vTln-XIH3L6AA91-Wt06pqcIN2GRXL2zrdYEC6JGfqy84qeab7V0ncvbOWwCYuhYDi8UO2a1xvWmdBc/embed' },
-    { Titulo: 'HTML5 Avanzado', Slide_Embed_URL: 'https://docs.google.com/presentation/d/e/2PACX-1vQHrgHWROF9aBOBFFVIsHSAH8JEaKBTTym0SvWLFwbLY-fux7zqb9SHVodZcGgG_jSELyLfCI_57BRU/embed' }
+    { Titulo: 'Datos No Agrupados', Slide_Embed_ID: '2PACX-1vRndRh69UxkKMdnXo-8NJuSvBFVhPO-vALoLAyaacHHZVURx8OxoYz-jZB30PoLCX65PiN6oJyoqfo3', Thumbnail_Path: 'img/pptx/datos_no_agrupados.png' },
+    { Titulo: 'Electrónica Digital', Slide_Embed_ID: '2PACX-1vRCdEw85JiDkLsdGDjVVrpFDcH6LuojqAz1mFoUstDeq6tGMqHmp-FPmtmEsxrKz2eDYLChZzOK40h2', Thumbnail_Path: 'img/pptx/electronica_digital.png' },
+    { Titulo: 'Estructura de Datos 2', Slide_Embed_ID: '2PACX-1vTvtZBStPW16UbZ9pm_eiW4ClMdjDyuINHmPNSrfpEHMUQeFfozknVf_f0HMbaPiHwxsTBayHZFo2NU', Thumbnail_Path: 'img/pptx/estructura_datos_2.png' },
+    { Titulo: 'Didáctica Informática', Slide_Embed_ID: '2PACX-1vSrG0GkskW6HR6z9hgkoQmq61UE_K81Stogr5Gwished9Sdox20PcrAhxSQOUgkB8bgsG6ZE4puXZ01', Thumbnail_Path: 'img/pptx/didactica.png' }
   ];
 
   let data = pptxList.length > 0 ? pptxList : defaultData;
@@ -144,14 +140,22 @@ async function loadPresentaciones() {
   // Mezclar aleatoriamente y seleccionar exactamente 8
   data = data.sort(() => Math.random() - 0.5).slice(0, 8);
 
-  container.innerHTML = data.map((item, i) => `
-    <div class="pptx-thumb" data-url="${item.Slide_Embed_URL || ''}" data-title="${item.Titulo || 'Presentación'}">
-      <img src="${item.Thumbnail_URL || 'https://picsum.photos/300/200?random=' + (i+10)}" alt="${item.Titulo}">
-      <div class="title-overlay">${item.Titulo || 'Presentación'}</div>
-    </div>
-  `).join('');
+  container.innerHTML = data.map((item, i) => {
+    // Si en el Sheet pones la URL completa o solo el ID de Google Slides:
+    let embedUrl = item.Slide_Embed_ID || '';
+    if (embedUrl && !embedUrl.startsWith('http')) {
+      embedUrl = `https://docs.google.com/presentation/d/e/${embedUrl}/embed?start=false&loop=false&delayms=3000`;
+    }
 
-  // VINCULAR CLIC PARA ABRIR EL MODAL
+    return `
+      <div class="pptx-thumb" data-url="${embedUrl}" data-title="${item.Titulo || 'Presentación'}">
+        <img src="${item.Thumbnail_Path || 'https://picsum.photos/300/200?random=' + (i+10)}" alt="${item.Titulo || 'Presentación'}">
+        <div class="title-overlay">${item.Titulo || 'Presentación'}</div>
+      </div>
+    `;
+  }).join('');
+
+  // VINCULAR EVENTO DE CLIC PARA ABRIR EN EL MODAL
   document.querySelectorAll('.pptx-thumb').forEach(thumb => {
     thumb.addEventListener('click', function() {
       const url = this.getAttribute('data-url');
@@ -171,7 +175,7 @@ document.getElementById('closeModal').addEventListener('click', () => {
   document.getElementById('modalIframe').src = '';
 });
 
-// INICIALIZACIÓN AL CERRAR LA CARGA DEL DOM
+// INICIALIZACIÓN
 window.addEventListener('DOMContentLoaded', () => {
   loadArticles();
   loadWorkshops();
