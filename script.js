@@ -1,6 +1,8 @@
 // URL base de tu Google Sheet publicado en la web
 const SPREADSHEET_PUB_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-eRTNJZ0pF-U7ZVzv7-Kq2QbQQVLd3jPepl1B7kxYPovsIUE6TohtfAWPbO4etMOCE7B-FOI7NET2/pubhtml';
 
+//'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-eRTNJZ0pF-U7ZVzv7-Kq2QbQQVLd3jPepl1B7kxYPovsIUE6TohtfAWPbO4etMOCE7B-FOI7NET2/pubhtml'//
+
 // Función para consultar pestañas vía la API pública GViz
 async function fetchSheetTab(sheetName) {
   const idMatch = SPREADSHEET_PUB_URL.match(/\/d\/e\/([^\/]+)/);
@@ -47,9 +49,9 @@ async function loadArticles() {
 
   // Datos por defecto de respaldo
   const data = articles.length > 0 ? articles : [
-    { Titulo: 'Conexión a Internet y Redes', Resumen: 'Aprende sobre capas, protocolos TCP/IP y cómo viajan los datos.', Banner_URL: 'https://picsum.photos/800/320?random=1' },
-    { Titulo: 'Evolución del Concepto de Límite', Resumen: 'Un recorrido histórico desde Arquímedes hasta Cauchy y Weierstrass.', Banner_URL: 'https://picsum.photos/800/320?random=2' },
-    { Titulo: 'Introducción a DevOps', Resumen: 'Metodología colaborativa entre desarrollo y operaciones de software.', Banner_URL: 'https://picsum.photos/800/320?random=3' }
+    { Titulo: 'Conexión a Internet y Redes', Resumen: 'Aprende sobre capas, protocolos TCP/IP y cómo viajan los datos.', Banner_URL: './p/TCP.png' },
+    { Titulo: 'Evolución del Concepto de Límite', Resumen: 'Un recorrido histórico desde Arquímedes hasta Cauchy y Weierstrass.', Banner_URL: './p/evolucion_concepto_limite.png' },
+    { Titulo: 'Introducción a DevOps', Resumen: 'Metodología colaborativa entre desarrollo y operaciones de software.', Banner_URL: './images/DevOps.png' }
   ];
 
   // CARRUSEL (PRIMEROS 3)
