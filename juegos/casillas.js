@@ -23,7 +23,7 @@ let modoAventura = false;
 // Evalúa la expresión matemática
 function evaluar(operacion) {
   try {
-    return eval(operacion);
+    return Function(`'use strict'; return (${operacion})`)();
   } catch (e) {
     return null;
   }
