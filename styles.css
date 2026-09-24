@@ -70,12 +70,13 @@ marquee#marq a {
 }
 
 /* NAVBAR CON ESTILOS INDIVIDUALES POR SECCIÓN */
+/* NAVBAR BASE */
 .navbar15 {
   background: var(--azul);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 15px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -84,11 +85,12 @@ marquee#marq a {
 
 .nav-toggle-btn {
   color: white;
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
   background: none;
   border: none;
-  padding: 10px;
+  padding: 12px;
+  display: none; /* Oculto en escritorio */
 }
 
 .nav45 {
@@ -96,6 +98,7 @@ marquee#marq a {
   list-style: none;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .nav45 > li {
@@ -112,7 +115,7 @@ marquee#marq a {
   transition: background 0.3s;
 }
 
-/* Hover personalizado por color */
+/* Hover en escritorio */
 .nav45 > li.nav-heuristica:hover > a { background: var(--nav-heuristica); }
 .nav45 > li.nav-programacion:hover > a { background: var(--nav-programacion); }
 .nav45 > li.nav-matematica:hover > a { background: var(--nav-matematica); color: #000; }
@@ -120,7 +123,7 @@ marquee#marq a {
 .nav45 > li.nav-biblioteca:hover > a { background: var(--nav-biblioteca); }
 .nav45 > li.nav-workshops:hover > a { background: var(--nav-workshops); }
 
-/* SUBMENÚS DROPDOWN */
+/* SUBMENÚS DROPDOWN (Escritorio) */
 .nav45 li ul {
   display: none;
   position: absolute;
@@ -131,6 +134,7 @@ marquee#marq a {
   list-style: none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   border-radius: 0 0 5px 5px;
+  z-index: 1001;
 }
 
 .nav45 li:hover > ul {
@@ -150,7 +154,6 @@ marquee#marq a {
   background: #f0f0f0;
   color: var(--rosa);
 }
-
 /* MENÚ CATEGORÍAS ROJO */
 .categorias-bar {
   background: var(--rojo);
@@ -589,14 +592,73 @@ footer {
 }
 
 /* RESPONSIVE DESIGN */
+
 @media (max-width: 900px) {
   .articles-grid { grid-template-columns: repeat(2, 1fr); }
   .workshops-grid { grid-template-columns: repeat(2, 1fr); }
   .presentaciones-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-content { grid-template-columns: 1fr; }
+  
+  .nav-toggle-btn {
+    display: block; /* Muestra el botón de hamburguesa */
+  }
+
+  .nav45 {
+    display: none; /* Oculta la lista en pantallas pequeñas */
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    background: var(--azul);
+    padding: 10px 0;
+  }
+
+  /* Clase activa que se conmuta con JS */
+  .nav45.active {
+    display: flex;
+  }
+
+  .nav45 > li > a {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Submenús en versión móvil */
+  .nav45 li ul {
+    position: static;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .nav45 li ul li a {
+    color: #fff;
+    padding-left: 35px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .articles-grid,
+  .workshops-grid,
+  .presentaciones-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  .footer-content { 
+    grid-template-columns: 1fr; 
+  }
 }
 
 @media (max-width: 600px) {
-  .articles-grid { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
+  .articles-grid,
+  .workshops-grid,
+  .presentaciones-grid { 
+    grid-template-columns: 1fr; 
+  }
+
+  .sidebar { 
+    display: none; 
+  }
+  
+  .head, .back {
+    height: 180px;
+    font-size: 2rem;
+  }
 }
