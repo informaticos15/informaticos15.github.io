@@ -60,13 +60,19 @@ async function loadArticles() {
   const carouselItems = data.slice(0, 3);
   slidesCount = carouselItems.length;
 
-  carouselContainer.innerHTML = carouselItems.map((item, idx) => `
-    <div class="carousel-slide ${idx === 0 ? 'active' : ''}" style="background-image: url('${item.Banner_URL || 'https://picsum.photos/800/320'}')">
+  carouselContainer.innerHTML = carouselItems.map((item, idx) => {
+  const bgImg = item.Banner_URL && item.Banner_URL.trim() !== '' 
+    ? item.Banner_URL 
+    : 'https://picsum.photos/800/320';
+
+  return `
+    <div class="carousel-slide ${idx === 0 ? 'active' : ''}" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 70%), url('${bgImg}');">
       <h2>${item.Titulo || 'Sin Título'}</h2>
       <p>${item.Resumen || ''}</p>
       <a href="javascript:void(0)" onclick="openArticle('${item.Google_Doc_ID}')" class="btn-read">Ir al artículo</a>
     </div>
-  `).join('');
+  `;
+}).join('');
 
   // GRID 6 ARTÍCULOS
   const gridItems = data.slice(0, 6);
