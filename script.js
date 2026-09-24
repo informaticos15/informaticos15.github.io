@@ -47,29 +47,32 @@ async function loadArticles() {
   const carouselContainer = document.getElementById('carouselContainer');
   const gridContainer = document.getElementById('articlesGrid');
 
-  // Datos por defecto si el sheet está vacío
-  const data = articles.length > 0 ? articles : [
-    { Titulo: 'Conexión a Internet y Redes', Resumen: 'Aprende sobre capas, protocolos TCP/IP y cómo viajan los datos.', Banner_URL: './p/TCP.png' },
-    { Titulo: 'Evolución del Concepto de Límite', Resumen: 'Un recorrido histórico desde Arquímedes hasta Cauchy y Weierstrass.', Banner_URL: './p/evolucion_concepto_limite.png' },
-    { Titulo: 'Introducción a DevOps', Resumen: 'Metodología colaborativa entre desarrollo y operaciones de software.', Banner_URL: './p/DevOps.png' }
+  const defaultArticles = [
+    { Titulo: 'Conexión a Internet y Redes', Resumen: 'Aprende sobre capas, protocolos TCP/IP y cómo viajan los datos.', Banner_URL: './p/TCP.png', Google_Doc_ID: '' },
+    { Titulo: 'Evolución del Concepto de Límite', Resumen: 'Un recorrido histórico desde Arquímedes hasta Cauchy y Weierstrass.', Banner_URL: './p/evolucion_concepto_limite.png', Google_Doc_ID: '' },
+    { Titulo: 'Introducción a DevOps', Resumen: 'Metodología colaborativa entre desarrollo y operaciones de software.', Banner_URL: './p/DevOps.png', Google_Doc_ID: '' }
   ];
 
-  // CARRUSEL (PRIMEROS 3)
+  const data = articles.length > 0 ? articles : defaultArticles;
+
+  // CARRUSEL
   const carouselItems = data.slice(0, 3);
   slidesCount = carouselItems.length;
+
   carouselContainer.innerHTML = carouselItems.map((item, idx) => `
     <div class="carousel-slide ${idx === 0 ? 'active' : ''}" style="background-image: url('${item.Banner_URL || 'https://picsum.photos/800/320'}')">
       <h2>${item.Titulo || 'Sin Título'}</h2>
       <p>${item.Resumen || ''}</p>
-      <a href="#" class="btn-read">Ir al artículo</a>
+      <a href="javascript:void(0)" onclick="openArticle('${item.Google_Doc_ID}')" class="btn-read">Ir al artículo</a>
     </div>
   `).join('');
 
-  // GRID (HASTA 6 CAJAS RECIENTES)
+  // GRID 6 ARTÍCULOS
   const gridItems = data.slice(0, 6);
+
   gridContainer.innerHTML = gridItems.map(item => `
-    <article class="article-card">
-      <img src="${item.Banner_URL || 'https://picsum.photos/300/150'}" alt="${item.Titulo || 'Artículo'}">
+    <article class="article-card" style="cursor: pointer;" onclick="openArticle('${item.Google_Doc_ID}')">
+      <img src="${item.Banner_URL || 'https://picsum.photos/300/150'}" alt="${item.Titulo}">
       <div class="article-card-body">
         <h4>${item.Titulo || 'Artículo sin título'}</h4>
         <p>${item.Resumen ? item.Resumen.substring(0, 80) + '...' : ''}</p>
@@ -77,6 +80,39 @@ async function loadArticles() {
     </article>
   `).join('');
 }
+
+function openArticle(docId) {
+  if (!docId) {
+    alert("Este artículo no tiene un ID de Google Doc configurado en el Sheet.");
+    return;
+  }
+
+  const homeSections = document.getElementById('homeSections');
+  const articleViewer = document.getElementById('articleViewer');
+  const articleContent = document.getElementById('articleContent');
+
+  // 1. Ocultar Home y mostrar visor
+  homeSections.style.display = 'none';
+  articleViewer.style.display = 'block';
+  articleContent.innerHTML = '<p style="text-align: center; color: #666;">Cargando contenido del artículo...</p>';
+
+  // 2. Renderizar el Google Doc mediante iframe embebido sin bordes de Google
+  const docUrl = `https://docs.google.com/document/d/${docId}/pub?embedded=true`;
+  
+  articleContent.innerHTML = `
+    <iframe src="${docUrl}" style="width: 100%; height: 800px; border: none; overflow: auto;"></iframe>
+  `;
+
+  // Desplazar suavemente hacia arriba
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// BOTÓN PARA VOLVER A LA PÁGINA PRINCIPAL
+document.getElementById('btnBackToHome').addEventListener('click', () => {
+  document.getElementById('articleViewer').style.display = 'none';
+  document.getElementById('homeSections').style.display = 'block';
+  document.getElementById('articleContent').innerHTML = '';
+});
 
 // CONTROLES DEL CARRUSEL
 document.getElementById('nextSlide').addEventListener('click', () => {
