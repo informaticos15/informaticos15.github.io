@@ -144,48 +144,64 @@ document.getElementById('prevSlide').addEventListener('click', () => {
   slides[currentSlide].classList.add('active');
 });
 
-// CARGAR WORKSHOPS
+// NUEVA FUNCIÓN loadWorkshops()
 async function loadWorkshops() {
   const workshops = await fetchSheetTab('Workshops');
   const container = document.getElementById('workshopsGrid');
 
-  const defaultWorkshops = [
-    { Titulo: 'Rey de Redes', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Protocolos', Modulo_2: 'Dispositivos', Modulo_3: 'Topologias' },
-    { Titulo: 'Google Sheets', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Funciones', Modulo_2: 'Tablas', Modulo_3: 'Graficos' },
-    { Titulo: 'Web Dev', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'HTML', Modulo_2: 'CSS', Modulo_3: 'JavaScript' },
-    { Titulo: 'Automatización', Imagen_URL: './blog/images/hdiem.png', Modulo_1: 'Sensores', Modulo_2: 'PLC', Modulo_3: 'Control' }
-  ];
+  if (!container) return;
 
-  const data = workshops.length >= 4 ? workshops.slice(0, 4) : defaultWorkshops;
+  // 1. Normalizar propiedades insensible a mayúsculas/minúsculas
+  const items = workshops.map(row => {
+    let normalized = {};
+    Object.keys(row).forEach(k => {
+      normalized[k.trim().toLowerCase()] = String(row[k] || '').trim();
+    });
 
-  container.innerHTML = data.map(item => {
-    let imgSrc = item.Imagen_URL && item.Imagen_URL.trim() !== '' 
-      ? item.Imagen_URL 
-      : 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
+    return {
+      id: normalized['id_workshop'] || normalized['col_0'] || '',
+      titulo: normalized['titulo'] || normalized['col_1'] || '',
+      imagen: normalized['imagen_url'] || normalized['col_2'] || '',
+      mod1: normalized['modulo_1'] || normalized['col_3'] || '',
+      mod2: normalized['modulo_2'] || normalized['col_4'] || '',
+      mod3: normalized['modulo_3'] || normalized['col_5'] || '',
+      link: normalized['link_url'] || normalized['col_6'] || '#'
+    };
+  }).filter(w => w.titulo !== '');
+
+  if (items.length === 0) {
+    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #777;">No hay workshops disponibles.</p>';
+    return;
+  }
+
+  // 2. Renderizar las tarjetas de los workshops
+  container.innerHTML = items.map((w, index) => {
+    const imgSrc = w.imagen !== '' ? w.imagen : 'https://via.placeholder.com/80/3499fe/ffffff?text=W';
+    const linkHref = w.link !== '' ? w.link : '#';
+    const linkTarget = w.link.startsWith('http') ? '_blank' : '_self';
 
     return `
       <div class="workshop-card">
-        <img src="${imgSrc}" onerror="this.onerror=null; this.src='https://via.placeholder.com/80/3499fe/ffffff?text=W';" alt="${item.Titulo || 'Workshop'}">
-        <h4>${item.Titulo || 'Workshop'}</h4>
+        <img src="${imgSrc}" onerror="this.onerror=null; this.src='https://via.placeholder.com/80/3499fe/ffffff?text=W';" alt="${w.titulo}">
+        <h4>${w.titulo}</h4>
         <ul>
-          <li>• ${item.Modulo_1 || 'Módulo 1'}</li>
-          <li>• ${item.Modulo_2 || 'Módulo 2'}</li>
-          <li>• ${item.Modulo_3 || 'Módulo 3'}</li>
+          ${w.mod1 ? `<li>• ${w.mod1}</li>` : ''}
+          ${w.mod2 ? `<li>• ${w.mod2}</li>` : ''}
+          ${w.mod3 ? `<li>• ${w.mod3}</li>` : ''}
         </ul>
-        <a href="${item.Link_URL || '#'}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
+        <a href="${linkHref}" target="${linkTarget}" class="btn-read" style="padding: 4px 10px; font-size: 11px;">Ver más</a>
       </div>
     `;
   }).join('');
 }
 
-// FUNCIÓN loadPresentaciones() ROBUTA A DESPLAZAMIENTO DE COLUMNAS
+// FUNCIÓN loadPresentaciones()
 async function loadPresentaciones() {
   const pptxList = await fetchSheetTab('Presentaciones');
   const container = document.getElementById('presentacionesGrid');
 
   if (!container) return;
 
-  // Normalización de claves y ajuste por filas incompletas
   let items = pptxList.map(row => {
     let normalized = {};
     Object.keys(row).forEach(k => {
@@ -196,7 +212,6 @@ async function loadPresentaciones() {
     let slideUrl = normalized['slide_embed_url'] || normalized['col_3'] || '';
     let thumbPath = normalized['thumbnail_path'] || normalized['col_4'] || '';
 
-    // Corregir desplazamiento de celda si Slide_Embed_URL no empieza por http
     if (slideUrl && !slideUrl.startsWith('http')) {
       if (!thumbPath) thumbPath = slideUrl;
       slideUrl = '';
@@ -214,13 +229,11 @@ async function loadPresentaciones() {
     return;
   }
 
-  // Mezcla aleatoria (Fisher-Yates)
   for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [items[i], items[j]] = [items[j], items[i]];
   }
 
-  // Tomar hasta 8 elementos
   const selected = items.slice(0, 8);
 
   container.innerHTML = selected.map((item, index) => {
@@ -234,7 +247,6 @@ async function loadPresentaciones() {
     `;
   }).join('');
 
-  // Evento click en miniatura
   container.querySelectorAll('.pptx-thumb').forEach(thumb => {
     thumb.addEventListener('click', function() {
       let url = this.getAttribute('data-url');
@@ -245,7 +257,6 @@ async function loadPresentaciones() {
         return;
       }
 
-      // Convertir URLs normales de edit/pub a /embed para reproducir dentro del modal iframe
       if (url.includes('/edit')) {
         url = url.split('/edit')[0] + '/embed';
       } else if (url.includes('/pub') && !url.includes('/embed')) {
