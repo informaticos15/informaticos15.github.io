@@ -251,7 +251,7 @@ marquee#marq a {
 /* CARRUSEL DESTACADO */
 .carousel-section {
   position: relative;
-  background: #000;
+  background: #f4f4f4; /* Mantiene un fondo claro acorde al sitio si tarda en cargar */
   color: white;
   border-radius: 8px;
   overflow: hidden;
@@ -264,14 +264,15 @@ marquee#marq a {
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   display: none;
   flex-direction: column;
   justify-content: flex-end;
   padding: 25px;
-  background-blend-mode: overlay;
-  background-color: rgba(0,0,0,0.4);
+  /* Degradado suave para asegurar legibilidad del texto sin franjas negras fáticas */
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+  position: relative;
 }
-
 .carousel-slide.active {
   display: flex;
 }
@@ -280,6 +281,8 @@ marquee#marq a {
   font-size: 24px;
   margin-bottom: 10px;
   color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  z-index: 2;
 }
 
 .carousel-slide p {
@@ -287,6 +290,8 @@ marquee#marq a {
   margin-bottom: 15px;
   max-width: 80%;
   line-height: 1.4;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  z-index: 2;
 }
 
 .btn-read {
@@ -298,6 +303,7 @@ marquee#marq a {
   border-radius: 4px;
   font-weight: bold;
   font-size: 13px;
+  z-index: 2;
 }
 
 .carousel-arrow {
