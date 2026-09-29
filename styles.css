@@ -257,7 +257,7 @@ marquee#marq a {
   background: #f4f4f4; /* Mantiene un fondo claro acorde al sitio si tarda en cargar */
   color: white;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: ;
   height: 320px;
   margin-bottom: 25px;
 }
