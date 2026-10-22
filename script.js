@@ -218,6 +218,28 @@ async function fetchSheetTab(nombre) {
   }
 }
 
+// Para pestañas SIN fila de encabezados (Workshops, Presentaciones): devuelve filas como listas, por posición de columna.
+// Si la hoja sí trae encabezados, se detectan y se descartan. Devuelve null si no se pudo leer.
+async function fetchSheetFilas(nombre) {
+  const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&headers=0&sheet=${encodeURIComponent(nombre)}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const m = (await res.text()).match(/setResponse\(([\s\S]*)\);?\s*$/);
+    if (!m) throw new Error('respuesta inesperada');
+    const json = JSON.parse(m[1]);
+    if (json.status === 'error') throw new Error((json.errors && json.errors[0] && json.errors[0].detailed_message) || 'error de Google Sheets');
+    const filas = (json.table.rows || []).map(r => ((r && r.c) || []).map(cel =>
+      String(cel ? ((cel.f !== undefined && cel.f !== null) ? cel.f : (cel.v == null ? '' : cel.v)) : '').trim()));
+    // ¿la primera fila es un encabezado? (la columna 2 dice "titulo")
+    if (filas.length && normKey(filas[0][1]) === 'titulo') filas.shift();
+    return filas;
+  } catch (err) {
+    console.error('Error leyendo la pestaña ' + nombre + ':', err);
+    return null;
+  }
+}
+
 async function cargarArticulos() {
   let filas = await fetchSheetTab('Articulos');
   let sinConexion = false;
@@ -467,19 +489,12 @@ function pintarDiagnostico() {
 // =====================================================================
 //  Workshops y presentaciones (pestañas del mismo Sheet)
 // =====================================================================
-function filaNormalizada(row) {
-  const n = {};
-  Object.keys(row).forEach(k => { n[normKey(k)] = String(row[k] == null ? '' : row[k]).trim(); });
-  return n;
-}
-
+// Workshops: id | título | imagen | módulo 1 | módulo 2 | módulo 3 | enlace
 function pintarWorkshops() {
   const cont = $('workshopsGrid');
   if (!cont || WORKSHOPS === null) return;
-  const items = WORKSHOPS.map(filaNormalizada).map(n => ({
-    titulo: n.titulo || n.col_1 || '', imagen: n.imagen_url || n.col_2 || '',
-    mods: [n.modulo_1 || n.col_3, n.modulo_2 || n.col_4, n.modulo_3 || n.col_5].filter(Boolean),
-    link: n.link_url || n.col_6 || ''
+  const items = WORKSHOPS.map(r => ({
+    titulo: r[1] || '', imagen: r[2] || '', mods: [r[3], r[4], r[5]].filter(Boolean), link: r[6] || ''
   })).filter(w => w.titulo);
   if (!items.length) { cont.innerHTML = '<p class="vacio-grande">No hay workshops disponibles.</p>'; return; }
   cont.innerHTML = items.map(w => {
@@ -496,21 +511,28 @@ function pintarWorkshops() {
   }).join('');
 }
 
+// Presentaciones: id | título | categoría | enlace de Google Slides (o su ID) | miniatura
+function urlSlides(v) {
+  v = String(v || '').trim();
+  if (!v) return '';
+  if (/^https?:/i.test(v)) return v;
+  return 'https://docs.google.com/presentation/d/e/' + v + '/embed?start=false&loop=false&delayms=3000';
+}
+
 function pintarPresentaciones() {
   const cont = $('presentacionesGrid');
   if (!cont || PRESENTACIONES === null) return;
-  const items = PRESENTACIONES.map(filaNormalizada).map(n => {
-    let slide = n.slide_embed_url || n.col_3 || '', thumb = n.thumbnail_path || n.col_4 || '';
-    if (slide && !/^https?:/i.test(slide)) { if (!thumb) thumb = slide; slide = ''; }
-    return { titulo: n.titulo || n.col_1 || '', slide, thumb };
-  }).filter(p => p.titulo);
+  const items = PRESENTACIONES.map(r => ({
+    titulo: r[1] || '', cat: r[2] || '', slide: urlSlides(r[3]), thumb: r[4] || ''
+  })).filter(p => p.titulo);
   if (!items.length) { cont.innerHTML = '<p class="vacio-grande">No hay presentaciones disponibles.</p>'; return; }
   for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
   cont.innerHTML = items.slice(0, 8).map(p => {
     const img = imgUrl(p.thumb);
+    const area = AREAS[slug(p.cat)] ? slug(p.cat) : 'otros';
     return `
-      <div class="pptx-thumb" data-url="${esc(p.slide)}" data-title="${esc(p.titulo)}" role="button" tabindex="0">
-        ${img ? `<img src="${esc(img)}" alt="${esc(p.titulo)}" loading="lazy" data-fb="ppt">` : ''}
+      <div class="pptx-thumb area-${area}" data-url="${esc(p.slide)}" data-title="${esc(p.titulo)}" role="button" tabindex="0">
+        ${img ? `<img src="${esc(img)}" alt="${esc(p.titulo)}" loading="lazy" data-fb="ppt">` : '<div class="ppt-ph">📊</div>'}
         <div class="title-overlay">${esc(p.titulo)}</div>
       </div>`;
   }).join('');
@@ -672,10 +694,10 @@ function conectarEventos() {
   document.addEventListener('error', e => {
     const img = e.target;
     if (!img || img.tagName !== 'IMG' || !img.dataset.fb) return;
-    if (img.dataset.fb === 'card' || img.dataset.fb === 'ws') {
+    if (img.dataset.fb === 'card' || img.dataset.fb === 'ws' || img.dataset.fb === 'ppt') {
       const d = document.createElement('div');
-      d.className = img.dataset.fb === 'card' ? 'img-ph' : 'ws-ph';
-      d.textContent = '📘';
+      d.className = { card: 'img-ph', ws: 'ws-ph', ppt: 'ppt-ph' }[img.dataset.fb];
+      d.textContent = img.dataset.fb === 'ppt' ? '📊' : '📘';
       img.replaceWith(d);
     } else {
       const fig = img.closest('figure');
@@ -691,8 +713,8 @@ async function iniciar() {
   pintarMenu();
   conectarEventos();
   render(); // muestra la estructura enseguida
-  const pesWork = fetchSheetTab('Workshops').then(f => { WORKSHOPS = f || []; pintarWorkshops(); });
-  const pesPres = fetchSheetTab('Presentaciones').then(f => { PRESENTACIONES = f || []; pintarPresentaciones(); });
+  const pesWork = fetchSheetFilas('Workshops').then(f => { WORKSHOPS = f || []; pintarWorkshops(); });
+  const pesPres = fetchSheetFilas('Presentaciones').then(f => { PRESENTACIONES = f || []; pintarPresentaciones(); });
   await cargarArticulos();
   LISTO = true;
   pintarSidebar();
