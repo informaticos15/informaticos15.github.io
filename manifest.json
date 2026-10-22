@@ -1,22 +1,16 @@
 {
-  "short_name": "i15",
-  "name": "Informaticos 15 - Educación Informática",
-  "icons": [
-    {
-      "src": "img/i15.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "img/i15.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": "/index.html",
-  "background_color": "#ffffff",
-  "theme_color": "#3d47d9",
+  "name": "Informáticos 15 - Educación Informática UPEL",
+  "short_name": "Informáticos 15",
+  "description": "Artículos, workshops y presentaciones del pensum de Educación Informática UPEL.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "scope": "/"
+  "background_color": "#f4f4f4",
+  "theme_color": "#6248cc",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
 }
