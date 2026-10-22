@@ -1,78 +1,42 @@
-const CACHE_NAME = 'i15-pwa-cache-v1';
+const CACHE = 'i15-v3';
+const SHELL = ['./', './index.html', './styles.css', './script.js', './manifest.json', './icon-192.png', './icon-512.png'];
+const CDN_OK = ['fonts.googleapis.com', 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net'];
 
-// Archivos estáticos principales que se guardarán en caché para uso offline
-const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/script.js',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css?family=Barriecito|Roboto:400,500,700|Arimo',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
-];
-
-// Evento Install: Guardar recursos estáticos en caché
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Guardando archivos estáticos en caché...');
-      return cache.addAll(ASSETS_TO_CACHE);
-    }).then(() => self.skipWaiting())
-  );
+self.addEventListener('install', e => {
+  // cada archivo por separado: si uno falta, los demás se guardan igual
+  e.waitUntil(caches.open(CACHE).then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {})))).then(() => self.skipWaiting()));
 });
 
-// Evento Activate: Limpiar cachés antiguas si se actualiza la versión
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log('[Service Worker] Eliminando caché antigua:', cache);
-            return caches.delete(cache);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
-  );
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
-// Evento Fetch: Estrategia Stale-While-Revalidate o Network-First
-self.addEventListener('fetch', (event) => {
-  // Ignorar peticiones a Google Sheets en el evento de caché estático para asegurar datos frescos
-  if (event.request.url.includes('google.com/spreadsheets')) {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return new Response(JSON.stringify({ error: "Sin conexión a la base de datos." }), {
-          headers: { 'Content-Type': 'application/json' }
-        });
+self.addEventListener('fetch', e => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+
+  // los datos de Google Sheets siempre van a la red (la página guarda su propia última copia)
+  if (url.hostname.endsWith('google.com') && url.pathname.indexOf('/spreadsheets/') > -1) return;
+
+  if (url.origin === location.origin) {
+    // archivos del sitio: red primero (así las actualizaciones llegan de inmediato) y caché si no hay internet
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res && res.ok) { const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); }
+        return res;
+      }).catch(() => caches.match(req).then(m => m || (req.mode === 'navigate' ? caches.match('./index.html') : undefined)))
+    );
+  } else if (CDN_OK.indexOf(url.hostname) > -1) {
+    // fuentes y librerías: caché primero, se refresca en segundo plano
+    e.respondWith(
+      caches.match(req).then(cacheado => {
+        const red = fetch(req).then(res => {
+          if (res && (res.ok || res.type === 'opaque')) { const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); }
+          return res;
+        }).catch(() => cacheado);
+        return cacheado || red;
       })
     );
-    return;
   }
-
-  // Para el resto de activos, intentar red y respaldar con caché si está offline
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        // Devuelve la respuesta en caché e intenta actualizar en segundo plano
-        fetch(event.request).then((networkResponse) => {
-          if (networkResponse.status === 200) {
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
-          }
-        }).catch(() => {/* Ignorar errores en segundo plano */});
-
-        return cachedResponse;
-      }
-
-      return fetch(event.request).then((networkResponse) => {
-        return networkResponse;
-      });
-    }).catch(() => {
-      // Si todo falla (offline total sin caché de esa página)
-      if (event.request.headers.get('accept').includes('text/html')) {
-        return caches.match('/index.html');
-      }
-    })
-  );
 });
