@@ -1,4 +1,4 @@
-const CACHE = 'i15-v3';
+const CACHE = 'i15-v4';
 const SHELL = ['./', './index.html', './styles.css', './script.js', './manifest.json', './icon-192.png', './icon-512.png'];
 const CDN_OK = ['fonts.googleapis.com', 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'cdn.jsdelivr.net'];
 
