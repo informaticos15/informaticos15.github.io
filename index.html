@@ -3,13 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informaticos 15 - Educación Informática UPEL</title>
+  <title>Informáticos 15 - Educación Informática UPEL</title>
+  <meta name="description" content="Portal de la Cohorte 2015 de Educación Informática UPEL: artículos del pensum, workshops y presentaciones.">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6248cc">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Informáticos 15">
 
   <!-- Fuentes e Iconos -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barriecito|Roboto:400,500,700|Arimo">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
-  <!-- Estilos CSS Externos -->
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,134 +26,79 @@
   <header class="head">
     <div class="back">INFORMATICOS 15</div>
     <marquee id="marq" scrollamount="4">
-      <b>Bienvenido al Portal de Educación Informática UPEL. Explora contenidos de <a href="#">Matemática</a>, <a href="#">Programación</a>, <a href="#">Sistemas</a> y <a href="#">Recursos Pedagógicos</a>.</b>
+      <b>Bienvenido al Portal de Educación Informática UPEL. Explora contenidos de <a href="#/area/matematica">Matemática</a>, <a href="#/area/programacion">Programación</a>, <a href="#/area/sistemas">Sistemas</a> y <a href="#/materia/recursos">Recursos Pedagógicos</a>.</b>
     </marquee>
   </header>
 
-  <!-- NAVBAR CON ESTILOS PROPIOS EN CADA OPCIÓN -->
+  <!-- NAVBAR (se construye con script.js a partir del pensum) -->
   <nav class="navbar15">
-    <button class="nav-toggle-btn" id="toggleSidebarBtn"><i class="fa fa-bars"></i></button>
-    <ul class="nav45">
-      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-      <li class="nav-heuristica"><a href="#"><i class="fa fa-search"></i> Heurística</a>
-        <ul>
-          <li><a href="#">Intro Investigación</a></li>
-          <li><a href="#">Investigación Educativa</a></li>
-        </ul>
-      </li>
-      <li class="nav-programacion"><a href="#">{ } Programación</a>
-        <ul>
-          <li><a href="#">Estructura de Datos I</a></li>
-          <li><a href="#">Estructura de Datos II</a></li>
-          <li><a href="#">Estructura de Datos III</a></li>
-          <li><a href="#">Bases de Datos</a></li>
-          <li><a href="#">Lenguajes de Programacion Web</a></li>
-          <li><a href="#">INternet y HTML</a></li>
-        </ul>
-      </li>
-      <li class="nav-matematica"><a href="#">∑ Matemática</a>
-        <ul>
-          <li><a href="#">Intro al Calculo</a></li>
-          <li><a href="#">Intro al Álgebra</a></li>
-          <li><a href="#">Estadisticas</a></li>
-          <li><a href="#">Cálculo Integral</a></li>
-          <li><a href="#">Álgebra Lineal</a></li>
-          <li><a href="#">Matemática Discreta</a></li>
-        </ul>
-      </li>
-      <li class="nav-sistemas"><a href="#">ㅱ Sistemas</a>
-        <ul>
-          <li><a href="#">Electrónica Digital</a></li>
-          <li><a href="#">Redes de Computadoras</a></li>
-          <li><a href="#">Sistemas de Informacion</a></li>
-          <li><a href="#">Sistemas de Computacion</a></li>
-          <li><a href="#">Redes Informaticas</a></li>          
-        </ul>
-      </li>
-      <li class="nav-biblioteca"><a href="#"><i class="fa fa-book"></i> Biblioteca</a>
-        <ul>
-          <li><a href="#">Pensum UPEL</a></li>
-          <li><a href="#">Recursos</a></li>
-          <li><a href="#">Libros de Texto</a></li>
-          <li><a href="#">Reglamentos</a></li>
-          <li><a href="#">Planes de Curso</a></li>
-        </ul>
-      </li>
-      <li class="nav-workshops"><a href="#"><i class="fa fa-code"></i> Workshops</a>
-        <ul>
-          <li><a href="#">Rey de Redes</a></li>
-          <li><a href="#">Google Sheets</a></li>
-          <li><a href="#">Automatizacion</a></li>
-          <li><a href="#">Web Dev</a></li>
-        </ul>  
-      </li>
-    </ul>
+    <button class="nav-toggle-btn" id="toggleSidebarBtn" aria-label="Menú"><i class="fa fa-bars"></i></button>
+    <ul class="nav45" id="navMenu"></ul>
   </nav>
 
-  <!-- MENÚ CATEGORÍAS ROJO -->
+  <!-- CATEGORÍAS -->
   <div class="categorias-bar">
-    <span>Principal</span> |
-    <span>Matemática</span> |
-    <span>Programación</span> |
-    <span>Sistemas</span> |
-    <span>Investigación</span> |
-    <span>Tutoriales</span> |
-    <span>Lógica & Algoritmos</span>
+    <a href="#/">Principal</a> |
+    <a href="#/area/matematica">Matemática</a> |
+    <a href="#/area/programacion">Programación</a> |
+    <a href="#/area/sistemas">Sistemas</a> |
+    <a href="#/area/heuristica">Investigación</a> |
+    <a href="#/etiqueta/tutoriales">Tutoriales</a> |
+    <a href="#/etiqueta/logica-algoritmos">Lógica &amp; Algoritmos</a>
   </div>
 
-  <!-- CONTAINER CON SIDEBAR Y MAIN -->
+  <!-- BUSCADOR -->
+  <form class="searchbar" id="formBuscar" role="search">
+    <input type="search" id="inputBuscar" placeholder="Buscar artículos, temas o materias..." aria-label="Buscar">
+    <button type="submit" aria-label="Buscar"><i class="fa fa-search"></i></button>
+  </form>
+
+  <div id="avisoOffline" class="aviso-offline oculto">Sin conexión: se muestra la última versión guardada de los artículos.</div>
+
   <div class="layout-container">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-      <div class="search-box">
-        <input type="text" placeholder="Buscar temas...">
-        <button><i class="fa fa-search"></i></button>
+      <div class="menuv">
+        <h4>Más recientes</h4>
+        <ul id="sidebarRecientes"></ul>
       </div>
       <div class="menuv">
-        <h4>Navegación Rápida</h4>
-        <ul>
-          <li><a href="#">Cálculo Diferencial</a></li>
-          <li><a href="#">Estructura de Datos</a></li>
-          <li><a href="#">Electrónica Digital</a></li>
-          <li><a href="#">Metodología UPEL</a></li>
-          <li><a href="#">Pensum de Estudio</a></li>
-        </ul>
+        <h4>Etiquetas</h4>
+        <div id="sidebarTags" class="tags-nube"></div>
       </div>
     </aside>
 
     <main class="main-content">
-        <!-- CONTENEDOR PARA VER EL ARTÍCULO COMPLETO (SPA) -->
-        <article id="articleViewer" style="display: none; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <button id="btnBackToHome" class="btn-read" style="margin-bottom: 20px; background: var(--azulM); cursor: pointer;">
-            &larr; Volver a las novedades
-          </button>
-          <div id="articleContent">Cargando artículo...</div>
-        </article>
-      
-        <!-- CONTENIDO DE LA PÁGINA PRINCIPAL -->
-        <div id="homeSections">
-          <!-- CARRUSEL DESTACADO -->
-          <section class="carousel-section">
-            <button class="carousel-arrow prev" id="prevSlide">&lt;</button>
-            <button class="carousel-arrow next" id="nextSlide">&gt;</button>
-            <div id="carouselContainer"></div>
-          </section>
-      
-          <!-- ARTÍCULOS RECIENTES -->
-          <h3 class="section-title">Artículos Recientes</h3>
-          <section class="articles-grid" id="articlesGrid"></section>
-      
-          <!-- WORKSHOPS -->
-          <h3 class="section-title">Workshops Prácticos</h3>
-          <section class="workshops-grid" id="workshopsGrid"></section>
-      
-          <!-- PRESENTACIONES EDUCATIVAS -->
-          <h3 class="section-title">Presentaciones Educativas</h3>
-          <section class="presentaciones-grid" id="presentacionesGrid"></section>
-        </div>
-      
-      </main>
+
+      <!-- INICIO -->
+      <div id="vistaInicio">
+        <section class="carousel-section">
+          <button class="carousel-arrow prev" id="prevSlide" aria-label="Anterior">&lt;</button>
+          <button class="carousel-arrow next" id="nextSlide" aria-label="Siguiente">&gt;</button>
+          <div id="carouselContainer"></div>
+        </section>
+
+        <h3 class="section-title">Artículos Recientes</h3>
+        <section class="articles-grid" id="articlesGrid"></section>
+        <p class="ver-todos oculto" id="verTodos"><a href="#/todos">Ver todos los artículos →</a></p>
+
+        <h3 class="section-title">Workshops Prácticos</h3>
+        <section class="workshops-grid" id="workshopsGrid"></section>
+
+        <h3 class="section-title">Presentaciones Educativas</h3>
+        <section class="presentaciones-grid" id="presentacionesGrid"></section>
+      </div>
+
+      <!-- LISTAS (sección, materia, etiqueta, búsqueda) -->
+      <div id="vistaLista" class="oculto"></div>
+
+      <!-- ARTÍCULO -->
+      <div id="vistaArticulo" class="oculto"></div>
+
+      <!-- DIAGNÓSTICO (#/diagnostico) -->
+      <div id="vistaDiag" class="oculto"></div>
+
+    </main>
   </div>
 
   <!-- MODAL PARA PRESENTACIONES -->
@@ -153,7 +106,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <span id="modalTitle">Presentación</span>
-        <span class="close-btn" id="closeModal">&times;</span>
+        <span class="close-btn" id="closeModal" aria-label="Cerrar">&times;</span>
       </div>
       <div class="modal-body">
         <iframe id="modalIframe" src="" allowfullscreen></iframe>
@@ -161,7 +114,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-content">
       <div class="footer-col">
@@ -171,19 +123,19 @@
       <div class="footer-col">
         <h4>Enlaces Importantes</h4>
         <ul>
-          <li><a href="#">Pensum de Estudio UPEL</a></li>
-          <li><a href="#">Planes de Curso</a></li>
-          <li><a href="#">Reglamentos Estudiantiles</a></li>
-          <li><a href="#">Recursos Didácticos</a></li>
+          <li><a href="#/materia/pensum-upel">Pensum de Estudio UPEL</a></li>
+          <li><a href="#/materia/planes-de-curso">Planes de Curso</a></li>
+          <li><a href="#/materia/reglamentos">Reglamentos Estudiantiles</a></li>
+          <li><a href="#/materia/recursos">Recursos Didácticos</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Síguenos</h4>
         <div class="rrss-icons">
-          <a href="https://facebook.com" target="_blank"><i class="fa fa-facebook"></i></a>
-          <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a>
-          <a href="https://youtube.com" target="_blank"><i class="fa fa-youtube"></i></a>
-          <a href="https://github.com" target="_blank"><i class="fa fa-github"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
+          <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa fa-github"></i></a>
         </div>
       </div>
     </div>
@@ -192,7 +144,7 @@
     </div>
   </footer>
 
-  <!-- Lógica JavaScript Externa -->
+  <noscript><p style="padding:20px;text-align:center">Este sitio necesita JavaScript para mostrar los artículos.</p></noscript>
   <script src="script.js"></script>
 </body>
 </html>
